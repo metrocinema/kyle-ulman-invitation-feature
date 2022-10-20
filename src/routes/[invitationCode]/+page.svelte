@@ -1,9 +1,13 @@
 <script lang="ts">
 	import type { PageData } from './$types';
 
+	import Rsvp from '$lib/rsvp/Rsvp.svelte';
+
 	export let data: PageData;
 
 	console.log(data);
 </script>
 
-<h1 class="text-3xl font-bold underline">Hello Tailwind!</h1>
+<main>
+	<Rsvp />
+</main>

@@ -4,15 +4,18 @@ import type { PageServerLoad, Actions } from './$types';
 export const load: PageServerLoad = async ({ params }) => {
 	const code = params.invitationCode;
 
-	const res = await fetch(`${import.meta.env.VITE_API_URL}/${code}`, {
-		method: 'GET',
-		headers: {
-			'content-type': 'application/json',
-			accept: 'application/json'
-		}
-	});
+	// const res = await fetch(`${import.meta.env.VITE_API_URL}/${code}`, {
+	// 	method: 'GET',
+	// 	headers: {
+	// 		'content-type': 'application/json',
+	// 		accept: 'application/json',
+	// 		'Cache-Control': 'public'
+	// 	}
+	// });
 
-	const ret = await res.json();
+	// const ret = await res.json();
+
+	const ret = {};
 
 	return ret;
 };

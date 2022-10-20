@@ -7,7 +7,7 @@
 	<p>
 		To access an invitation, you must include an invitation code in the URL.
 	</p>
-	<code
-		>https://metro-cinema-invitation-feature-kyle-ulman.vercel.app/your-invitation-code</code
-	>
+	<code>
+		https://metro-cinema-invitation-feature-kyle-ulman.vercel.app/your-invitation-code
+	</code>
 </section>
