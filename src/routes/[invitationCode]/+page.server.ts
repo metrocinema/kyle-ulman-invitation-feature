@@ -1,6 +1,6 @@
-import type { PageLoad } from './$types';
+import type { PageServerLoad, Actions } from './$types';
 
-// export const load: PageLoad = async ({ params, fetch }) => {
+// export const load: PageServerLoad = async ({ params, fetch }) => {
 // 	const start = performance.now();
 
 // 	const code: string = params.invitationCode;
@@ -9,9 +9,16 @@ import type { PageLoad } from './$types';
 
 // 	if (ret) {
 // 		const end = performance.now();
-// 		console.log(`Module: ${end - start}`);
+// 		console.log(`Server: ${end - start}`);
 // 	}
+
 // 	// return ret;
 // };
-// * 296ms
-// * 290ms
+// * 307ms
+// * 298ms
+
+export const actions: Actions = {
+	default: () => {
+		// Do something
+	}
+};
