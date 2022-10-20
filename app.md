@@ -10,8 +10,9 @@
         - Set up Tailwind
         - Set up file structure
     - Verify API connection
+    - Form
+        - Implement form logic
 - Friday - Form
-    - Implement form logic
     - Begin form components
 - Saturday - Form
 - Implement form components
