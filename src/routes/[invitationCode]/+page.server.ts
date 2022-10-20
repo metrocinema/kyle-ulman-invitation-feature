@@ -14,9 +14,7 @@ export const load: PageServerLoad = async ({ params }) => {
 
 	const ret = await res.json();
 
-	console.log(ret);
-
-	return { code: params.invitationCode };
+	return ret;
 };
 
 // export async function load({ params, fetch }): PageServerLoad {
