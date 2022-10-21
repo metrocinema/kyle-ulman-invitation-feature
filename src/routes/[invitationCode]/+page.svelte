@@ -6,6 +6,4 @@
 	export let data: PageData;
 </script>
 
-<main class="grid min-h-screen place-content-center">
-	<Rsvp />
-</main>
+<Rsvp />
