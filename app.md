@@ -15,8 +15,8 @@
 - Friday - Form
     - Begin form components
 - Saturday - Form
-- Implement form components
-- Finish form section
+    - Implement form components
+    - Finish form section
 - Sunday - Remaining sections
     - Hero
     - Host Message
@@ -54,6 +54,7 @@
     - on selection, timeout 1.5 seconds
         - PUT dietaryPreferences, specialDietaryRequests
     - return success | update msg
+    - +++ save shadow copy of preferences if user clicks "no" or "maybe" then back to "yes" 
 - On form revisit 
 
 ## API Routing
