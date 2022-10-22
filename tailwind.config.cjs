@@ -16,7 +16,8 @@ module.exports = {
 				'light/background-strong': '#F5F3F3',
 				'light/background': '#FFF',
 				'light/line': '#EDEAE9',
-				'light-primary-line': '#3F6AC4'
+				'light-primary-line': '#3F6AC4',
+				'dark/text': '#F5F4F3'
 			}
 		}
 	},
