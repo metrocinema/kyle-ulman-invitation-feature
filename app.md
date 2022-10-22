@@ -1,5 +1,13 @@
 # Metro Cinema Invitation
 
+## To-do
+- +++ save shadow copy of preferences if user clicks "no" or "maybe" then back to "yes" 
+- Style form components
+- Add other sections
+- Style app to design
+- Wire up API
+- Polish
+
 ## Timeline
 
 - Thursday - Pre-production
@@ -15,8 +23,9 @@
 - Friday - Form
     - Begin form components
 - Saturday - Form
-    - Implement form components
+    - Style form components
     - Finish form section
+    - Start remaining sections
 - Sunday - Remaining sections
     - Hero
     - Host Message
@@ -53,9 +62,12 @@
         - toggle Vegetarian/Vegan
     - on selection, timeout 1.5 seconds
         - PUT dietaryPreferences, specialDietaryRequests
+        - +++ Show waiting message while the data sends
     - return success | update msg
-    - +++ save shadow copy of preferences if user clicks "no" or "maybe" then back to "yes" 
+        - Success response: “Excellent! Glad you can make it. We’ve notified [hostPreferredName] that you are coming, and we’ll let the chef know your dietary preferences.”
+        - Update response: “We’ve updated your response.”
 - On form revisit 
+    - GET their selection
 
 ## API Routing
 
