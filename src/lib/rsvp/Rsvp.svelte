@@ -51,14 +51,30 @@
 
 	let shadowBody: Body = body;
 
-	let returnMsg: string = '';
-	let nudgeTimeout: ReturnType<typeof setTimeout>;
+	let msg: string = '';
+	let nudgeTimeout: ReturnType<typeof setTimeout> | undefined;
 	let putTimeout: ReturnType<typeof setTimeout>;
 
 	async function resetPrefs() {
 		body.dietaryPreferences = [];
 		body.specialDietaryRequests = '';
 	}
+
+	const nudge = {
+		set: () => {
+			console.log('set');
+			clearTimeout(nudgeTimeout);
+
+			nudgeTimeout = setTimeout(() => {
+				msg =
+					'We need to know your dietary preferences so that we can customize the menu to meet your needs.';
+			}, 3 * 1000);
+		},
+		clear: () => {
+			clearTimeout(nudgeTimeout);
+			nudgeTimeout = undefined;
+		}
+	};
 
 	async function update() {
 		clearTimeout(putTimeout);
@@ -71,26 +87,25 @@
 	function handleForm(e: Event) {
 		if (body.rsvpResponse === 'no') {
 			iconName = 'frown';
-			returnMsg = `Sorry you can’t make it. We’ve notified [hostPreferredName], and hopefully we’ll see you next time.`;
+			msg = `Sorry you can’t make it. We’ve notified [hostPreferredName], and hopefully we’ll see you next time.`;
 			resetPrefs();
 		} else if (body.rsvpResponse === 'maybe') {
 			iconName = 'meh';
-			returnMsg = `We’ve notified [hostPreferredName]. Please make a decision soon, since we need a final head count as soon as possible.`;
+			msg = `We’ve notified [hostPreferredName]. Please make a decision soon, since we need a final head count as soon as possible.`;
 			resetPrefs();
 		} else if (body.rsvpResponse === 'yes') {
 			iconName = 'smile';
-			returnMsg = '';
+			msg = '';
 
 			// Nudge user to make a selection after 10 seconds of inactivtiy
-			// nudgeTimeout = setTimeout(() => {
-			// 	returnMsg =
-			// 		'We need to know your dietary preferences so that we can customize the menu to meet your needs.';
-			// }, 10 * 1000);
+			nudge.set();
 
 			const clickedInput = e.target as HTMLInputElement;
 
 			// No restrictions is clicked
 			if (clickedInput.id === 'none') {
+				nudge.clear();
+
 				// checked
 				if (clickedInput.checked === true) {
 					body.dietaryPreferences = ['none'];
@@ -110,6 +125,8 @@
 					clickedInput.id
 				)
 			) {
+				nudge.clear();
+
 				if (body.dietaryPreferences.includes('none')) {
 					body.dietaryPreferences = body.dietaryPreferences.filter(
 						(pref) => pref !== 'none'
@@ -140,7 +157,6 @@
 				};
 			}
 		}
-		console.log('Shadow bdy', shadowBody);
 
 		update();
 	}
@@ -150,9 +166,9 @@
 	<small>Please RSVP</small>
 	<h1 class="text-2xl">Are You Going?</h1>
 	<img src={`/${iconName}.png`} alt="Question mark" width="32" height="32" />
-	{#if returnMsg}
+	{#if msg}
 		<p>
-			{returnMsg}
+			{msg}
 		</p>
 	{/if}
 	<!-- TODO: Use form actions with progressive enhancement -->
@@ -196,9 +212,9 @@
 			{/each}
 			<h2 class="text-xl">Allergies and special dietary requests.</h2>
 			<div class="flex flex-col">
-				<label for="specialDietaryRequests"
-					>Special Dietary Requests</label
-				>
+				<label for="specialDietaryRequests">
+					Special Dietary Requests
+				</label>
 				<textarea
 					name="specialDietaryRequests"
 					id="specialDietaryRequests"
@@ -207,6 +223,7 @@
 					class="bg-slate-200"
 					bind:value={body.specialDietaryRequests}
 					on:input={update}
+					on:focus={nudge.clear}
 				/>
 			</div>
 		{/if}
