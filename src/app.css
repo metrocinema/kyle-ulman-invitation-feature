@@ -33,3 +33,65 @@
 	font-style: normal;
 	font-weight: 400;
 }
+
+@layer base {
+	.light-line {
+		border: 1px solid #edeae9;
+	}
+
+	.light-line-strong {
+		border-top: 1px solid #cfcbcb;
+	}
+
+	.border-trans {
+		border: 2px solid transparent;
+	}
+
+	.active-border {
+		border: 2px solid #3f6ac4;
+	}
+
+	.icon {
+		width: 32px;
+		height: 32px;
+		margin-top: 6px;
+		margin-bottom: 16px;
+	}
+
+	.kepler-bold {
+		font-family: 'Kepler Std';
+		font-size: 44px;
+		font-weight: 700;
+		text-transform: uppercase;
+		line-height: 1;
+		letter-spacing: 0.25px;
+	}
+
+	.kepler-light {
+		font-family: 'Kepler Std';
+		font-weight: 300;
+		line-height: 24px;
+	}
+
+	.kepler-medium {
+		font-size: 28px;
+		font-weight: 500;
+		line-height: 32px;
+		letter-spacing: -0.45px;
+	}
+
+	.national-subheading {
+		line-height: 24px;
+		font-weight: 400;
+		font-size: 10px;
+		line-height: 14px;
+		text-transform: uppercase;
+		letter-spacing: 1.5px;
+	}
+
+	.national-body-sm {
+		font-weight: 400;
+		font-size: 12px;
+		line-height: 1;
+	}
+}

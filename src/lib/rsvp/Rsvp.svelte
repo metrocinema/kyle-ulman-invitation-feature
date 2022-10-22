@@ -44,9 +44,9 @@
 	}
 
 	let body: Body = {
-		rsvpResponse: undefined,
+		rsvpResponse: 'yes',
 		dietaryPreferences: [],
-		specialDietaryRequests: ''
+		specialDietaryRequests: "I don't like mushrooms"
 	};
 
 	let shadowBody: Body = body;
@@ -193,61 +193,104 @@
 	}
 </script>
 
-<section class="grid justify-items-center gap-4">
-	<small>Please RSVP</small>
-	<h1 class="text-2xl">Are You Going?</h1>
-	<img src={`/${iconName}.png`} alt="Question mark" width="32" height="32" />
+<section
+	class="grid justify-items-center bg-light/background-strong px-6 py-10"
+>
+	<small class="national-subheading">Please RSVP</small>
+	<h1 class="kepler-bold">Are You Going?</h1>
+	<img
+		src={`/${iconName}.png`}
+		alt="Question mark"
+		width="32"
+		height="32"
+		class="icon"
+	/>
 
 	<!-- TODO: Use form actions with progressive enhancement -->
-	<form on:change={handleForm} class="flex flex-col gap-2">
-		<Toggle
-			label="Yes"
-			id="yes"
-			name="rsvpResponse"
-			value="yes"
-			bind:group={body.rsvpResponse}
-		/>
-		<Toggle
-			label="No"
-			id="no"
-			name="rsvpResponse"
-			value="no"
-			bind:group={body.rsvpResponse}
-		/>
-		<Toggle
-			label="Maybe"
-			id="maybe"
-			name="rsvpResponse"
-			value="maybe"
-			bind:group={body.rsvpResponse}
-		/>
+	<form on:change={handleForm} class="flex w-full flex-col">
+		<div class="flex justify-between gap-4">
+			<Toggle
+				label="Yes"
+				id="yes"
+				name="rsvpResponse"
+				value="yes"
+				bind:group={body.rsvpResponse}
+				rsvp={body.rsvpResponse}
+			/>
+			<Toggle
+				label="No"
+				id="no"
+				name="rsvpResponse"
+				value="no"
+				bind:group={body.rsvpResponse}
+				rsvp={body.rsvpResponse}
+			/>
+			<Toggle
+				label="Maybe"
+				id="maybe"
+				name="rsvpResponse"
+				value="maybe"
+				bind:group={body.rsvpResponse}
+				rsvp={body.rsvpResponse}
+			/>
+		</div>
 		{#if body.rsvpResponse === 'yes'}
-			<hr />
-			<h2 class="text-xl">Dietary preferences</h2>
-			{#each dietaryPreferencesInput as { label, id, value }}
-				<!-- TODO: Isolate to component -->
-				<div>
-					<label for={id}>{label}</label>
-					<input
-						type="checkbox"
-						{id}
-						name="dietaryPreferencesInput"
-						{value}
-						bind:group={body.dietaryPreferences}
-					/>
-				</div>
-			{/each}
-			<h2 class="text-xl">Allergies and special dietary requests.</h2>
-			<div class="flex flex-col">
-				<label for="specialDietaryRequests">
+			<hr class="light-line-strong my-6" />
+			<h2 class="mb-3 leading-6">Dietary preferences</h2>
+			<div class="flex flex-row flex-wrap justify-start gap-4 ">
+				{#each dietaryPreferencesInput as { label, id, value }}
+					<!-- TODO: Isolate to component -->
+					<label
+						for={id}
+						class="national-body-sm border-trans focus:active-border relative flex h-10 basis-[155.5px] place-items-center gap-2 whitespace-nowrap rounded-full bg-light/background p-3"
+						class:active-border={body.dietaryPreferences.includes(
+							value
+						)}
+					>
+						<div
+							class="light-line grid h-6 w-6 place-items-center rounded-full"
+							class:bg-light-primary-line={body.dietaryPreferences.includes(
+								value
+							)}
+						>
+							{#if body.dietaryPreferences.includes(value)}
+								<img
+									src="/check.png"
+									alt="Check mark."
+									width="12"
+									height="8"
+								/>
+							{/if}
+						</div>
+						{label}
+
+						<input
+							type="checkbox"
+							{id}
+							name="dietaryPreferencesInput"
+							{value}
+							bind:group={body.dietaryPreferences}
+							class="absolute opacity-0"
+						/>
+					</label>
+				{/each}
+			</div>
+			<h2 class="mt-4 mb-3 leading-6">
+				Allergies and special dietary requests.
+			</h2>
+			<div
+				class="light-line flex min-h-[120px] flex-col overflow-hidden rounded-[6px] bg-light/background"
+			>
+				<label
+					for="specialDietaryRequests"
+					class="national-body-sm mx-3 mt-[10px] text-light/primary-text"
+				>
 					Special Dietary Requests
 				</label>
 				<textarea
 					name="specialDietaryRequests"
 					id="specialDietaryRequests"
-					cols="30"
-					rows="10"
-					class="bg-slate-200"
+					class="block w-full grow px-3"
 					bind:value={body.specialDietaryRequests}
 					on:input={update}
 					on:focus={nudge.clear}
@@ -256,7 +299,7 @@
 		{/if}
 	</form>
 	{#if msg}
-		<p>
+		<p class="my-4">
 			{msg}
 		</p>
 	{/if}

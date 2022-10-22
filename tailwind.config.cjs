@@ -12,7 +12,11 @@ module.exports = {
 			colors: {
 				'light/text': '#1E1F21',
 				'light/text-weak': '#6D6E6F',
-				'light/primary-text': '#3F6AC4'
+				'light/primary-text': '#3F6AC4',
+				'light/background-strong': '#F5F3F3',
+				'light/background': '#FFF',
+				'light/line': '#EDEAE9',
+				'light-primary-line': '#3F6AC4'
 			}
 		}
 	},
