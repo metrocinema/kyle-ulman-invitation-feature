@@ -52,6 +52,7 @@
 	let shadowBody: Body = body;
 
 	let msg: string = '';
+	let isPut: boolean = false;
 	let nudgeTimeout: ReturnType<typeof setTimeout> | undefined;
 	let putTimeout: ReturnType<typeof setTimeout>;
 
@@ -62,13 +63,12 @@
 
 	const nudge = {
 		set: () => {
-			console.log('set');
 			clearTimeout(nudgeTimeout);
 
 			nudgeTimeout = setTimeout(() => {
 				msg =
 					'We need to know your dietary preferences so that we can customize the menu to meet your needs.';
-			}, 3 * 1000);
+			}, 10 * 1000);
 		},
 		clear: () => {
 			clearTimeout(nudgeTimeout);
@@ -77,28 +77,59 @@
 	};
 
 	async function update() {
+		shadowBody = {
+			...shadowBody,
+			rsvpResponse: body.rsvpResponse,
+			specialDietaryRequests: body.specialDietaryRequests
+		};
+
+		msg = `Saving your response...`;
+
 		clearTimeout(putTimeout);
 
 		putTimeout = setTimeout(() => {
-			// console.log(body);
+			if (
+				body.rsvpResponse === 'yes' &&
+				body.dietaryPreferences.length < 1
+			) {
+				nudge.set();
+				return;
+			}
+
+			// PUT body
+			if (isPut === false && body.rsvpResponse === 'yes') {
+				msg =
+					'Excellent! Glad you can make it. We’ve notified [hostPreferredName] that you are coming, and we’ll let the chef know your dietary preferences.';
+				isPut = true;
+			} else {
+				msg = 'We’ve updated your response.';
+			}
+
+			if (body.rsvpResponse === 'no') {
+				msg = `Sorry you can’t make it. We’ve notified [hostPreferredName], and hopefully we’ll see you next time.`;
+				return;
+			} else if (body.rsvpResponse === 'maybe') {
+				msg = `We’ve notified [hostPreferredName]. Please make a decision soon, since we need a final head count as soon as possible.`;
+				return;
+			}
 		}, 1500);
 	}
 
 	function handleForm(e: Event) {
 		if (body.rsvpResponse === 'no') {
+			nudge.clear();
 			iconName = 'frown';
-			msg = `Sorry you can’t make it. We’ve notified [hostPreferredName], and hopefully we’ll see you next time.`;
 			resetPrefs();
 		} else if (body.rsvpResponse === 'maybe') {
+			nudge.clear();
 			iconName = 'meh';
-			msg = `We’ve notified [hostPreferredName]. Please make a decision soon, since we need a final head count as soon as possible.`;
 			resetPrefs();
 		} else if (body.rsvpResponse === 'yes') {
 			iconName = 'smile';
 			msg = '';
 
 			// Nudge user to make a selection after 10 seconds of inactivtiy
-			nudge.set();
+			if (body.dietaryPreferences.length === 0) nudge.set();
 
 			const clickedInput = e.target as HTMLInputElement;
 
@@ -166,11 +197,7 @@
 	<small>Please RSVP</small>
 	<h1 class="text-2xl">Are You Going?</h1>
 	<img src={`/${iconName}.png`} alt="Question mark" width="32" height="32" />
-	{#if msg}
-		<p>
-			{msg}
-		</p>
-	{/if}
+
 	<!-- TODO: Use form actions with progressive enhancement -->
 	<form on:change={handleForm} class="flex flex-col gap-2">
 		<Toggle
@@ -228,4 +255,9 @@
 			</div>
 		{/if}
 	</form>
+	{#if msg}
+		<p>
+			{msg}
+		</p>
+	{/if}
 </section>
