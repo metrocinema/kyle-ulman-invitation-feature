@@ -1,5 +1,13 @@
 # Metro Cinema Invitation
 
+## To-do
+    - +++ save shadow copy of preferences if user clicks "no" or "maybe" then back to "yes" 
+    - Style form components
+    - Add other sections
+    - Style app to design
+    - Wire up API
+    - Polish
+
 ## Timeline
 
 - Thursday - Pre-production
@@ -15,8 +23,9 @@
 - Friday - Form
     - Begin form components
 - Saturday - Form
-    - Implement form components
+    - Style form components
     - Finish form section
+    - Start remaining sections
 - Sunday - Remaining sections
     - Hero
     - Host Message
@@ -57,13 +66,8 @@
     - return success | update msg
         - Success response: “Excellent! Glad you can make it. We’ve notified [hostPreferredName] that you are coming, and we’ll let the chef know your dietary preferences.”
         - Update response: “We’ve updated your response.”
-    - +++ save shadow copy of preferences if user clicks "no" or "maybe" then back to "yes" 
 - On form revisit 
     - GET their selection
-
-## Form Todo
-- Separate "no" and "maybe" messages from the response update message
- 
 
 ## API Routing
 
