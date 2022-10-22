@@ -1,3 +1,35 @@
 @tailwind base;
 @tailwind components;
 @tailwind utilities;
+
+@font-face {
+	font-family: 'Kepler Std';
+	src: url('/fonts/KeplerStd-BoldCnDisp.woff2') format('woff2');
+	font-weight: 700;
+}
+
+@font-face {
+	font-family: 'Kepler Std';
+	src: url('/fonts/KeplerStd-LightCapt.woff2') format('woff2');
+	font-weight: 300;
+}
+
+@font-face {
+	font-family: 'Kepler Std';
+	src: url('/fonts/KeplerStd-MediumScnSubh.woff2') format('woff2');
+	font-weight: 500;
+}
+
+@font-face {
+	font-family: 'National 2';
+	src: url('/fonts/national-2-regular-italic.woff2') format('woff2');
+	font-style: italic;
+	font-weight: 400;
+}
+
+@font-face {
+	font-family: 'National 2';
+	src: url('/fonts/national-2-regular.woff2') format('woff2');
+	font-style: normal;
+	font-weight: 400;
+}
