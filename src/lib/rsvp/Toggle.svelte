@@ -3,7 +3,7 @@
 		id: string,
 		name: string,
 		value: string,
-		group: 'yes' | 'no' | 'maybe' | undefined,
+		group: string | undefined,
 		rsvp: string | undefined;
 </script>
 

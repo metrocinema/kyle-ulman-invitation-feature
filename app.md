@@ -4,10 +4,8 @@
 - Should the event date adjust with timezones?
 
 ## To-do
-- Form PUT
 - Clean up styles
 - Polish
-- +++ save shadow copy of preferences if user clicks "no" or "maybe" then back to "yes" 
 
 ## Timeline
 
@@ -95,9 +93,9 @@
                     - Update response: “We’ve updated your response.”
 
 ## Invitation Codes
-- XQRN7D
-- H9K79U
-- CSKUK7
+- XQRN7D - Yes
+- H9K79U - No
+- CSKUK7 - Maybe
 - 4J9TP2
 - BQ9FAE
 - T7RSHR

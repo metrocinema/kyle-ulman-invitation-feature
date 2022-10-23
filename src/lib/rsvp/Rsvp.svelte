@@ -2,7 +2,34 @@
 	import Toggle from './Toggle.svelte';
 	import SectionHeader from '$lib/sectionHeader/SectionHeader.svelte';
 
+	export let hostPreferredName: string,
+		code: string | undefined,
+		rsvpResponse: string,
+		dietaryPreferences: Array<string>,
+		specialDietaryRequests: string;
+
 	let iconName: string = 'question';
+
+	// Messages
+	// prettier-ignore
+	const NUDGE_MSG = `We need to know your dietary preferences so that we can customize the menu to meet your needs.`;
+	const SAVING_MSG = `Saving your response...`;
+	const YES_MSG = `Excellent! Glad you can make it. We've notified ${hostPreferredName} that you are coming, and we'll let the chef know your dietary preferences.`;
+	const NO_MSG = `Sorry you can't make it. We've notified ${hostPreferredName}, and hopefully we'll see you next time.`;
+	const MAYBE_MSG = `We've notified ${hostPreferredName}. Please make a decision soon, since we need a final head count as soon as possible.`;
+	const UPDATE_MSG = `We've updated your response.`;
+
+	// RSVP
+	const YES: string = 'YES';
+	const NO: string = 'NO';
+	const MAYBE: string = 'MAYBE';
+
+	// Dietary Preferences
+	const NO_RESTRICTIONS: string = 'NO_RESTRICTIONS';
+	const VEGETARIAN: string = 'VEGETARIAN';
+	const VEGAN: string = 'VEGAN';
+	const GLUTEN_FREE: string = 'GLUTEN_FREE';
+	const LOW_CARB: string = 'LOW_CARB';
 
 	interface DietaryPreferencesInput {
 		label: string;
@@ -13,42 +40,44 @@
 	let dietaryPreferencesInput: Array<DietaryPreferencesInput> = [
 		{
 			label: 'No Restrictions',
-			id: 'none',
-			value: 'none'
+			id: NO_RESTRICTIONS,
+			value: NO_RESTRICTIONS
 		},
 		{
 			label: 'Vegetarian',
-			id: 'vegetarian',
-			value: 'vegetarian'
+			id: VEGETARIAN,
+			value: VEGETARIAN
 		},
 		{
 			label: 'Vegan',
-			id: 'vegan',
-			value: 'vegan'
+			id: VEGAN,
+			value: VEGAN
 		},
 		{
 			label: 'Gluten Free',
-			id: 'glutenFree',
-			value: 'glutenFree'
+			id: GLUTEN_FREE,
+			value: GLUTEN_FREE
 		},
 		{
 			label: 'Low Carb',
-			id: 'lowCarb',
-			value: 'lowCarb'
+			id: LOW_CARB,
+			value: LOW_CARB
 		}
 	];
 
 	interface Body {
-		rsvpResponse: 'yes' | 'no' | 'maybe' | undefined;
+		rsvpResponse: string | undefined;
 		dietaryPreferences: Array<string>;
 		specialDietaryRequests: string;
 	}
 
 	let body: Body = {
-		rsvpResponse: 'yes',
-		dietaryPreferences: [],
-		specialDietaryRequests: "I don't like mushrooms"
+		rsvpResponse: rsvpResponse || undefined,
+		dietaryPreferences: dietaryPreferences || [],
+		specialDietaryRequests: specialDietaryRequests || ''
 	};
+
+	console.log(body);
 
 	let shadowBody: Body = body;
 
@@ -65,10 +94,8 @@
 	const nudge = {
 		set: () => {
 			clearTimeout(nudgeTimeout);
-
 			nudgeTimeout = setTimeout(() => {
-				msg =
-					'We need to know your dietary preferences so that we can customize the menu to meet your needs.';
+				msg = NUDGE_MSG;
 			}, 10 * 1000);
 		},
 		clear: () => {
@@ -77,20 +104,14 @@
 		}
 	};
 
-	async function update() {
-		shadowBody = {
-			...shadowBody,
-			rsvpResponse: body.rsvpResponse,
-			specialDietaryRequests: body.specialDietaryRequests
-		};
-
-		msg = `Saving your response...`;
+	function update() {
+		msg = SAVING_MSG;
 
 		clearTimeout(putTimeout);
 
-		putTimeout = setTimeout(() => {
+		putTimeout = setTimeout(async () => {
 			if (
-				body.rsvpResponse === 'yes' &&
+				body.rsvpResponse === YES &&
 				body.dietaryPreferences.length < 1
 			) {
 				nudge.set();
@@ -98,34 +119,51 @@
 			}
 
 			// PUT body
-			if (isPut === false && body.rsvpResponse === 'yes') {
-				msg =
-					'Excellent! Glad you can make it. We’ve notified [hostPreferredName] that you are coming, and we’ll let the chef know your dietary preferences.';
+
+			const RES = await fetch(
+				`${import.meta.env.VITE_API_URL}/${code}/rsvp`,
+				{
+					method: 'PUT',
+					headers: {
+						'content-type': 'application/json',
+						accept: 'application/json'
+					},
+					body: JSON.stringify(body)
+				}
+			);
+
+			const RET = await RES.json();
+
+			console.log(RES);
+			console.log(RET);
+
+			if (isPut === false && body.rsvpResponse === YES) {
+				msg = YES_MSG;
 				isPut = true;
 			} else {
-				msg = 'We’ve updated your response.';
+				msg = UPDATE_MSG;
 			}
 
-			if (body.rsvpResponse === 'no') {
-				msg = `Sorry you can’t make it. We’ve notified [hostPreferredName], and hopefully we’ll see you next time.`;
+			if (body.rsvpResponse === NO) {
+				msg = NO_MSG;
 				return;
-			} else if (body.rsvpResponse === 'maybe') {
-				msg = `We’ve notified [hostPreferredName]. Please make a decision soon, since we need a final head count as soon as possible.`;
+			} else if (body.rsvpResponse === MAYBE) {
+				msg = MAYBE_MSG;
 				return;
 			}
 		}, 1500);
 	}
 
 	function handleForm(e: Event) {
-		if (body.rsvpResponse === 'no') {
+		if (body.rsvpResponse === NO) {
 			nudge.clear();
 			iconName = 'frown';
 			resetPrefs();
-		} else if (body.rsvpResponse === 'maybe') {
+		} else if (body.rsvpResponse === MAYBE) {
 			nudge.clear();
 			iconName = 'meh';
 			resetPrefs();
-		} else if (body.rsvpResponse === 'yes') {
+		} else if (body.rsvpResponse === YES) {
 			iconName = 'smile';
 			msg = '';
 
@@ -135,12 +173,12 @@
 			const clickedInput = e.target as HTMLInputElement;
 
 			// No restrictions is clicked
-			if (clickedInput.id === 'none') {
+			if (clickedInput.id === NO_RESTRICTIONS) {
 				nudge.clear();
 
 				// checked
 				if (clickedInput.checked === true) {
-					body.dietaryPreferences = ['none'];
+					body.dietaryPreferences = [NO_RESTRICTIONS];
 				}
 				// unchecked
 				else {
@@ -153,33 +191,34 @@
 			}
 			// Any other dietaryPreferencesInput are clicked & no restrictions has check
 			else if (
-				new RegExp('vegetarian|vegan|glutenFree|lowCarb', 'gm').test(
-					clickedInput.id
-				)
+				new RegExp(
+					`${VEGETARIAN}|${VEGAN}|${GLUTEN_FREE}|${LOW_CARB}`,
+					'gm'
+				).test(clickedInput.id)
 			) {
 				nudge.clear();
 
-				if (body.dietaryPreferences.includes('none')) {
+				if (body.dietaryPreferences.includes(NO_RESTRICTIONS)) {
 					body.dietaryPreferences = body.dietaryPreferences.filter(
-						(pref) => pref !== 'none'
+						(pref) => pref !== NO_RESTRICTIONS
 					);
 				}
 
 				if (
-					clickedInput.id === 'vegetarian' &&
+					clickedInput.id === VEGETARIAN &&
 					clickedInput.checked === true
 				) {
 					body.dietaryPreferences = body.dietaryPreferences.filter(
-						(pref) => pref !== 'vegan'
+						(pref) => pref !== VEGAN
 					);
 				}
 
 				if (
-					clickedInput.id === 'vegan' &&
+					clickedInput.id === VEGAN &&
 					clickedInput.checked === true
 				) {
 					body.dietaryPreferences = body.dietaryPreferences.filter(
-						(pref) => pref !== 'vegetarian'
+						(pref) => pref !== VEGETARIAN
 					);
 				}
 
@@ -211,30 +250,30 @@
 		<div class="flex justify-between gap-4">
 			<Toggle
 				label="Yes"
-				id="yes"
+				id={YES}
 				name="rsvpResponse"
-				value="yes"
+				value={YES}
 				bind:group={body.rsvpResponse}
 				rsvp={body.rsvpResponse}
 			/>
 			<Toggle
 				label="No"
-				id="no"
+				id={NO}
 				name="rsvpResponse"
-				value="no"
+				value={NO}
 				bind:group={body.rsvpResponse}
 				rsvp={body.rsvpResponse}
 			/>
 			<Toggle
 				label="Maybe"
-				id="maybe"
+				id={MAYBE}
 				name="rsvpResponse"
-				value="maybe"
+				value={MAYBE}
 				bind:group={body.rsvpResponse}
 				rsvp={body.rsvpResponse}
 			/>
 		</div>
-		{#if body.rsvpResponse === 'yes'}
+		{#if body.rsvpResponse === YES}
 			<hr class="light-line-strong my-6" />
 			<h2 class="mb-3 leading-6">Dietary preferences</h2>
 			<div class="flex flex-row flex-wrap justify-start gap-4 ">

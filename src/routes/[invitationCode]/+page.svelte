@@ -1,5 +1,6 @@
 <script lang="ts">
 	import type { PageData } from './$types';
+	import type { InvInvitation, InvEvent, InvGuest } from '$lib/types';
 
 	import Home from '$lib/home/Home.svelte';
 	import Hero from '$lib/hero/Hero.svelte';
@@ -10,39 +11,35 @@
 
 	export let data: PageData;
 
-	console.log(data);
+	const E: InvEvent = data?.ret.data?.event;
+	const I: InvInvitation = data?.ret.data?.invitation;
+	const G: InvGuest = data?.ret.data?.guest;
 
-	interface InvEvent {
-		posterUrl: string;
-		showTitle: string;
-		hostMessage: string;
-		hostPreferredName: string;
-		eventTitle: string;
-		hostFirstName: string;
-		hostLastName: string;
-		eventDateStart: string;
-		eventDateEnd: string;
-		specialInstructions: string;
-	}
-
-	const e: InvEvent = data?.ret.data?.event;
+	const DIETARY_PREFERENCES = G?.dietaryPreferences;
+	const SPECIAL_DIETARY_REQUESTS = G?.specialDietaryRequests;
 </script>
 
 {#if data.status !== 200}
 	<Home error={data.ret} code={data.code} />
 {:else}
-	<Hero posterUrl={e.posterUrl} showTitle={e.showTitle} />
+	<Hero posterUrl={E.posterUrl} showTitle={E.showTitle} />
 	<HostMessage
-		hostMessage={e.hostMessage}
-		hostPreferredName={e.hostPreferredName}
+		hostMessage={E.hostMessage}
+		hostPreferredName={E.hostPreferredName}
 	/>
-	<Rsvp />
+	<Rsvp
+		hostPreferredName={E.hostPreferredName}
+		rsvpResponse={I.rsvpResponse}
+		dietaryPreferences={DIETARY_PREFERENCES}
+		specialDietaryRequests={SPECIAL_DIETARY_REQUESTS}
+		code={data?.code}
+	/>
 	<EventDetails
-		eventTitle={e.eventTitle}
-		hostFirstName={e.hostFirstName}
-		hostLastName={e.hostLastName}
-		eventDateStart={e.eventDateStart}
-		eventDateEnd={e.eventDateEnd}
+		eventTitle={E.eventTitle}
+		hostFirstName={E.hostFirstName}
+		hostLastName={E.hostLastName}
+		eventDateStart={E.eventDateStart}
+		eventDateEnd={E.eventDateEnd}
 	/>
-	<SpecialInstructions specialInstructions={e.specialInstructions} />
+	<SpecialInstructions specialInstructions={E.specialInstructions} />
 {/if}
