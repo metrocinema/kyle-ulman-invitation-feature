@@ -4,11 +4,10 @@
 - Should the event date adjust with timezones?
 
 ## To-do
-- +++ save shadow copy of preferences if user clicks "no" or "maybe" then back to "yes" 
-- Add other sections
-- Style app to design
-- Wire up API
+- Form PUT
+- Clean up styles
 - Polish
+- +++ save shadow copy of preferences if user clicks "no" or "maybe" then back to "yes" 
 
 ## Timeline
 
