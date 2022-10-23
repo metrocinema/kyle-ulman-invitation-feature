@@ -1,5 +1,5 @@
 <script lang="ts">
-	import Home from '$lib/home/Home.svelte';
+	import CodeInput from '$lib/code-input/CodeInput.svelte';
 </script>
 
-<Home />
+<CodeInput />

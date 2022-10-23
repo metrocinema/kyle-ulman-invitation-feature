@@ -2,10 +2,10 @@
 	import type { PageData } from './$types';
 	import type { InvInvitation, InvEvent, InvGuest } from '$lib/types';
 
-	import Home from '$lib/home/Home.svelte';
+	import CodeInput from '$lib/code-input/CodeInput.svelte';
 	import Hero from '$lib/hero/Hero.svelte';
-	import HostMessage from '$lib/hostMessage/HostMessage.svelte';
-	import EventDetails from '$lib/eventDetails/EventDetails.svelte';
+	import HostMessage from '$lib/host-message/HostMessage.svelte';
+	import EventDetails from '$lib/event-details/EventDetails.svelte';
 	import SpecialInstructions from '$lib/specialInstructions/SpecialInstructions.svelte';
 	import Rsvp from '$lib/rsvp/Rsvp.svelte';
 
@@ -20,7 +20,7 @@
 </script>
 
 {#if data.status !== 200}
-	<Home error={data.ret} />
+	<CodeInput error={data.ret} />
 {:else}
 	<div class="bg-white pb-16 text-light/text shadow-lg shadow-black">
 		<Hero posterUrl={E.posterUrl} showTitle={E.showTitle} />

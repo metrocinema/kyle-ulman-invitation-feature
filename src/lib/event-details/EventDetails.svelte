@@ -1,7 +1,7 @@
 <script lang="ts">
 	import { format } from 'date-fns';
 
-	import SectionHeader from '$lib/sectionHeader/SectionHeader.svelte';
+	import SectionHeader from '$lib/section-header/SectionHeader.svelte';
 
 	export let eventTitle: string,
 		hostFirstName: string,
