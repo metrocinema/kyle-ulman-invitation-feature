@@ -19,7 +19,8 @@ module.exports = {
 				'light/line': '#EDEAE9', // grey
 				'light/primary-text': '#3F6AC4', // blue
 				'light/text-weak': '#6D6E6F', // grey
-				'dark/background': '#1E1F21' // dark
+				'dark/background': '#1E1F21', // dark
+				'active-clr': '#3F6AC4'
 			}
 		}
 	},

@@ -1,4 +1,5 @@
 <script lang="ts">
+	import { addFocusBorder, removeFocusBorder } from './';
 	import Toggle from './Toggle.svelte';
 	import SectionHeader from '$lib/section-header/SectionHeader.svelte';
 
@@ -279,13 +280,11 @@
 					<label
 						for={id}
 						class="national-sm light-line relative flex h-10 basis-[155.5px] place-items-center gap-2 whitespace-nowrap rounded-full bg-light/background p-3"
-						class:light-primary-line={body.dietaryPreferences.includes(
-							value
-						)}
+						class:active={body.dietaryPreferences.includes(value)}
 					>
 						<div
 							class="light-line grid h-6 w-6 place-items-center rounded-full"
-							class:bg-light-primary-line={body.dietaryPreferences.includes(
+							class:bg-active-clr={body.dietaryPreferences.includes(
 								value
 							)}
 						>
@@ -307,6 +306,8 @@
 							{value}
 							bind:group={body.dietaryPreferences}
 							class="absolute opacity-0"
+							on:focus={addFocusBorder}
+							on:blur={removeFocusBorder}
 						/>
 					</label>
 				{/each}
@@ -326,7 +327,7 @@
 				<textarea
 					name="specialDietaryRequests"
 					id="specialDietaryRequests"
-					class="block w-full grow px-3"
+					class="focus:focus block w-full grow px-3 outline-none"
 					bind:value={body.specialDietaryRequests}
 					on:input={update}
 					on:focus={nudge.clear}

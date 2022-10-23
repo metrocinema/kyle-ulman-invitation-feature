@@ -22,7 +22,7 @@
 	<p>Please enter your code and click the link below to go to your invite.</p>
 	<input
 		type="text"
-		class="rounded border border-light/line px-2 py-1 text-center focus:border-2 focus:border-light/primary-line focus-visible:border-2 focus-visible:border-light/primary-line"
+		class="light-line focus:light-primary-line rounded px-2 py-1 text-center outline-none"
 		bind:value={code}
 		required
 		bind:this={textInput}

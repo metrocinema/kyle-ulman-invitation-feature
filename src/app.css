@@ -46,8 +46,13 @@
 		border-top: 1px solid #cfcbcb;
 	}
 
-	.light-primary-line {
+	.light-primary-line,
+	.active {
 		border: 2px solid #3f6ac4;
+	}
+
+	.focus {
+		border: 2px dashed #3f6ac4;
 	}
 
 	.icon {
