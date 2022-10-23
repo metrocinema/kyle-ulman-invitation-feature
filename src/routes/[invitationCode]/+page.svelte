@@ -20,7 +20,7 @@
 </script>
 
 {#if data.status !== 200}
-	<Home error={data.ret} code={data.code} />
+	<Home error={data.ret} />
 {:else}
 	<div class="bg-white pb-16 text-light/text shadow-lg shadow-black">
 		<Hero posterUrl={E.posterUrl} showTitle={E.showTitle} />
