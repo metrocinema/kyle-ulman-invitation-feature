@@ -16,15 +16,22 @@
 	});
 </script>
 
-<section class="grid justify-items-center gap-4">
+<section
+	class="grid place-items-center gap-6 rounded bg-light/background py-10 px-6 text-center"
+>
 	{#if error}
 		<p class="font-medium text-red-500">{error}</p>
 	{/if}
-	<h1 class="text-2xl">Hey there!</h1>
-	<p>
-		Please enter a code below, or add it to the end of the url to access
-		your invite.
-	</p>
+	<h1 class="text-2xl">Hey Film-goer!</h1>
+	<p>Please enter your code and click the link below to go to your invite.</p>
+	<input
+		type="text"
+		class="rounded px-2 py-1 text-center outline outline-1"
+		bind:value={code}
+		required
+		bind:this={textInput}
+		on:click={handleInputClick}
+	/>
 	<code>
 		<a
 			href={`${import.meta.env.VITE_CLIENT_URL}/${code}`}
@@ -33,20 +40,4 @@
 			{import.meta.env.VITE_CLIENT_URL}/{code}
 		</a>
 	</code>
-	<div>
-		<input
-			type="text"
-			class="rounded px-2 py-1 outline outline-1"
-			bind:value={code}
-			required
-			bind:this={textInput}
-			on:click={handleInputClick}
-		/>
-		<a
-			href={`${import.meta.env.VITE_CLIENT_URL}/${code}`}
-			class="rounded px-2 py-1 outline outline-1"
-		>
-			Go to URL
-		</a>
-	</div>
 </section>

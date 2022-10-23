@@ -2,8 +2,7 @@
 	import '../app.css';
 </script>
 
-<main
-	class="mx-auto max-w-[375px] bg-white pb-16 text-light/text shadow-lg shadow-black"
->
+<!-- max-w-md -->
+<main class="max-w-[375px]">
 	<slot />
 </main>

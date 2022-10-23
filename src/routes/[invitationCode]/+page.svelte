@@ -22,24 +22,26 @@
 {#if data.status !== 200}
 	<Home error={data.ret} code={data.code} />
 {:else}
-	<Hero posterUrl={E.posterUrl} showTitle={E.showTitle} />
-	<HostMessage
-		hostMessage={E.hostMessage}
-		hostPreferredName={E.hostPreferredName}
-	/>
-	<Rsvp
-		hostPreferredName={E.hostPreferredName}
-		rsvpResponse={I.rsvpResponse}
-		dietaryPreferences={DIETARY_PREFERENCES}
-		specialDietaryRequests={SPECIAL_DIETARY_REQUESTS}
-		code={data?.code}
-	/>
-	<EventDetails
-		eventTitle={E.eventTitle}
-		hostFirstName={E.hostFirstName}
-		hostLastName={E.hostLastName}
-		eventDateStart={E.eventDateStart}
-		eventDateEnd={E.eventDateEnd}
-	/>
-	<SpecialInstructions specialInstructions={E.specialInstructions} />
+	<div class="bg-white pb-16 text-light/text shadow-lg shadow-black">
+		<Hero posterUrl={E.posterUrl} showTitle={E.showTitle} />
+		<HostMessage
+			hostMessage={E.hostMessage}
+			hostPreferredName={E.hostPreferredName}
+		/>
+		<Rsvp
+			hostPreferredName={E.hostPreferredName}
+			rsvpResponse={I.rsvpResponse}
+			dietaryPreferences={DIETARY_PREFERENCES}
+			specialDietaryRequests={SPECIAL_DIETARY_REQUESTS}
+			code={data?.code}
+		/>
+		<EventDetails
+			eventTitle={E.eventTitle}
+			hostFirstName={E.hostFirstName}
+			hostLastName={E.hostLastName}
+			eventDateStart={E.eventDateStart}
+			eventDateEnd={E.eventDateEnd}
+		/>
+		<SpecialInstructions specialInstructions={E.specialInstructions} />
+	</div>
 {/if}

@@ -10,14 +10,16 @@ module.exports = {
 		},
 		extend: {
 			colors: {
-				'light/text': '#1E1F21',
-				'light/text-weak': '#6D6E6F',
-				'light/primary-text': '#3F6AC4',
-				'light/background-strong': '#F5F3F3',
-				'light/background': '#FFF',
-				'light/line': '#EDEAE9',
-				'light-primary-line': '#3F6AC4',
-				'dark/text': '#F5F4F3'
+				'light/background': '#FFFFFF',
+				'dark/text': '#F5F4F3', // light
+				'light/text': '#1E1F21', // dark
+				'light/background-strong': '#F5F3F3', // grey
+				'light/icon': '#6D6E6F', // grey
+				'light-primary-line': '#3F6AC4', // blue
+				'light/line': '#EDEAE9', // grey
+				'light/primary-text': '#3F6AC4', // blue
+				'light/text-weak': '#6D6E6F', // grey
+				'dark/background': '#1E1F21' // dark
 			}
 		}
 	},
