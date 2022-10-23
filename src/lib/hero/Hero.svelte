@@ -1,11 +1,8 @@
 <script type="ts">
 	export let posterUrl: string, showTitle: string;
-
-	console.log('Poster URL:', posterUrl);
-	console.log('Show Title:', showTitle);
 </script>
 
-<section class="relative mb-12 flex flex-col items-center">
+<section class="relative flex flex-col items-center">
 	<img
 		src="/background.png"
 		alt="Hero background."
@@ -19,7 +16,7 @@
 		class="absolute bottom-[63px] h-[350px]"
 	/>
 	<div
-		class="national-body-sm absolute bottom-[63px] grid h-12 max-w-[231px] translate-y-[100%] place-items-center text-center text-dark/text"
+		class="national-body-sm absolute bottom-[60px] grid h-12 max-w-[231px] translate-y-[100%] place-items-start text-center tracking-[0.02em] text-dark/text"
 	>
 		<p>
 			{showTitle}

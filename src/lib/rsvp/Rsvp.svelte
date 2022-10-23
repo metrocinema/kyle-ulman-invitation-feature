@@ -1,5 +1,6 @@
 <script lang="ts">
 	import Toggle from './Toggle.svelte';
+	import SectionHeader from '$lib/sectionHeader/SectionHeader.svelte';
 
 	let iconName: string = 'question';
 
@@ -194,10 +195,9 @@
 </script>
 
 <section
-	class="grid justify-items-center bg-light/background-strong px-6 py-10"
+	class="grid justify-items-center bg-light/background-strong px-6 pb-6 pt-10"
 >
-	<small class="national-subheading">Please RSVP</small>
-	<h1 class="kepler-bold">Are You Going?</h1>
+	<SectionHeader heading="Are You Going?" subheading="Please RSVP" />
 	<img
 		src={`/${iconName}.png`}
 		alt="Question mark"
@@ -299,7 +299,7 @@
 		{/if}
 	</form>
 	{#if msg}
-		<p class="my-4">
+		<p class="mt-4">
 			{msg}
 		</p>
 	{/if}

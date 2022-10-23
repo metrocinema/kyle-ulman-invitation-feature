@@ -32,10 +32,11 @@
 	<Home error={data.ret} code={data.code} />
 {:else}
 	<Hero posterUrl={e.posterUrl} showTitle={e.showTitle} />
-	<!-- <HostMessage
+	<HostMessage
 		hostMessage={e.hostMessage}
 		hostPreferredName={e.hostPreferredName}
 	/>
+	<Rsvp />
 	<EventDetails
 		eventTitle={e.eventTitle}
 		hostFirstName={e.hostFirstName}
@@ -44,5 +45,4 @@
 		eventDateEnd={e.eventDateEnd}
 	/>
 	<SpecialInstructions specialInstructions={e.specialInstructions} />
-	<Rsvp /> -->
 {/if}

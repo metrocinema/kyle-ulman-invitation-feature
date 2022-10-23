@@ -1,5 +1,8 @@
 # Metro Cinema Invitation
 
+## Questions
+- Should the event date adjust with timezones?
+
 ## To-do
 - +++ save shadow copy of preferences if user clicks "no" or "maybe" then back to "yes" 
 - Add other sections

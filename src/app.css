@@ -74,6 +74,7 @@
 	}
 
 	.kepler-medium {
+		font-family: 'Kepler Std';
 		font-size: 28px;
 		font-weight: 500;
 		line-height: 32px;
@@ -81,6 +82,7 @@
 	}
 
 	.national-subheading {
+		font-family: 'National 2';
 		line-height: 24px;
 		font-weight: 400;
 		font-size: 10px;
@@ -90,6 +92,7 @@
 	}
 
 	.national-body-sm {
+		font-family: 'National 2';
 		font-weight: 400;
 		font-size: 12px;
 		line-height: 16px;
