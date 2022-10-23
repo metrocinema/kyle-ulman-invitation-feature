@@ -1,23 +1,23 @@
 <script lang="ts">
 	import type { PageData } from './$types';
-	import type { InvInvitation, InvEvent, InvGuest } from '$lib/types';
+	import type { InvitationEvent, InvitationResponse } from '$lib/types';
 
 	import CodeInput from '$lib/code-input/CodeInput.svelte';
+	import Divider from '$lib/divider/Divider.svelte';
+	import EventDetails from '$lib/event-details/EventDetails.svelte';
 	import Hero from '$lib/hero/Hero.svelte';
 	import HostMessage from '$lib/host-message/HostMessage.svelte';
-	import EventDetails from '$lib/event-details/EventDetails.svelte';
-	import SpecialInstructions from '$lib/special-instructions/SpecialInstructions.svelte';
 	import Rsvp from '$lib/rsvp/Rsvp.svelte';
-	import Divider from '$lib/divider/Divider.svelte';
+	import SpecialInstructions from '$lib/special-instructions/SpecialInstructions.svelte';
 
 	export let data: PageData;
 
-	const E: InvEvent = data?.ret.data?.event;
-	const I: InvInvitation = data?.ret.data?.invitation;
-	const G: InvGuest = data?.ret.data?.guest;
-
-	const DIETARY_PREFERENCES = G?.dietaryPreferences;
-	const SPECIAL_DIETARY_REQUESTS = G?.specialDietaryRequests;
+	const INVITATION_EVENT: InvitationEvent = data?.ret.data?.event;
+	const INVITATION_RESPONSE: InvitationResponse = {
+		rsvpResponse: data?.ret.data?.invitation.rsvpResponse,
+		dietaryPreferences: data?.ret.data?.guest.dietaryPreferences,
+		specialDietaryRequests: data?.ret.data?.guest.specialDietaryRequests
+	};
 </script>
 
 {#if data.status !== 200}
@@ -27,26 +27,31 @@
 		id="invitation-wrapper"
 		class="bg-white pb-16 text-light/text shadow-lg shadow-black"
 	>
-		<Hero posterUrl={E.posterUrl} showTitle={E.showTitle} />
+		<Hero
+			posterUrl={INVITATION_EVENT.posterUrl}
+			showTitle={INVITATION_EVENT.showTitle}
+		/>
 		<HostMessage
-			hostMessage={E.hostMessage}
-			hostPreferredName={E.hostPreferredName}
+			hostMessage={INVITATION_EVENT.hostMessage}
+			hostPreferredName={INVITATION_EVENT.hostPreferredName}
 		/>
 		<Rsvp
-			hostPreferredName={E.hostPreferredName}
-			rsvpResponse={I.rsvpResponse}
-			dietaryPreferences={DIETARY_PREFERENCES}
-			specialDietaryRequests={SPECIAL_DIETARY_REQUESTS}
+			hostPreferredName={INVITATION_EVENT.hostPreferredName}
+			rsvpResponse={INVITATION_RESPONSE.rsvpResponse}
+			dietaryPreferences={INVITATION_RESPONSE.dietaryPreferences}
+			specialDietaryRequests={INVITATION_RESPONSE.specialDietaryRequests}
 			code={data?.code}
 		/>
 		<Divider />
 		<EventDetails
-			eventTitle={E.eventTitle}
-			hostFirstName={E.hostFirstName}
-			hostLastName={E.hostLastName}
-			eventDateStart={E.eventDateStart}
-			eventDateEnd={E.eventDateEnd}
+			eventTitle={INVITATION_EVENT.eventTitle}
+			hostFirstName={INVITATION_EVENT.hostFirstName}
+			hostLastName={INVITATION_EVENT.hostLastName}
+			eventDateStart={INVITATION_EVENT.eventDateStart}
+			eventDateEnd={INVITATION_EVENT.eventDateEnd}
 		/>
-		<SpecialInstructions specialInstructions={E.specialInstructions} />
+		<SpecialInstructions
+			specialInstructions={INVITATION_EVENT.specialInstructions}
+		/>
 	</div>
 {/if}

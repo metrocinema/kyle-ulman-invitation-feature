@@ -278,7 +278,7 @@
 				{#each dietaryPreferencesInput as { label, id, value }}
 					<label
 						for={id}
-						class="national-sm focus:light-primary-line light-line relative flex h-10 basis-[155.5px] place-items-center gap-2 whitespace-nowrap rounded-full bg-light/background p-3"
+						class="national-sm light-line relative flex h-10 basis-[155.5px] place-items-center gap-2 whitespace-nowrap rounded-full bg-light/background p-3"
 						class:light-primary-line={body.dietaryPreferences.includes(
 							value
 						)}

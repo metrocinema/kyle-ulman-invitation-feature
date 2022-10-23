@@ -2,16 +2,12 @@
 	import { onMount } from 'svelte';
 
 	export let error: string | undefined = undefined;
-	export let code: string | undefined = undefined;
 
-	code = code || 'your-code-here';
+	let code: string = '';
 	let textInput: HTMLInputElement;
 
-	function handleInputClick() {
-		textInput.select();
-	}
-
 	onMount(() => {
+		textInput.focus();
 		textInput.select();
 	});
 </script>
@@ -26,11 +22,11 @@
 	<p>Please enter your code and click the link below to go to your invite.</p>
 	<input
 		type="text"
-		class="rounded px-2 py-1 text-center outline outline-1"
+		class="rounded border border-light/line px-2 py-1 text-center focus:border-2 focus:border-light/primary-line focus-visible:border-2 focus-visible:border-light/primary-line"
 		bind:value={code}
 		required
 		bind:this={textInput}
-		on:click={handleInputClick}
+		placeholder="your-code-here"
 	/>
 	<code>
 		<a

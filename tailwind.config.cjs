@@ -15,7 +15,7 @@ module.exports = {
 				'light/text': '#1E1F21', // dark
 				'light/background-strong': '#F5F3F3', // grey
 				'light/icon': '#6D6E6F', // grey
-				'light-primary-line': '#3F6AC4', // blue
+				'light/primary-line': '#3F6AC4', // blue
 				'light/line': '#EDEAE9', // grey
 				'light/primary-text': '#3F6AC4', // blue
 				'light/text-weak': '#6D6E6F', // grey

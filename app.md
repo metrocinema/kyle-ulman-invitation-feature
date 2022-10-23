@@ -5,7 +5,6 @@
 - Should the event date adjust with timezones?
 
 ## To-do
-- Clean up styles
 - Clean up types
 - Refactor GET handling
     - Check times in +page.server vs in browser

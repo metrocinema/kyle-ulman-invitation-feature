@@ -1,8 +1,4 @@
-export interface InvInvitation {
-	rsvpResponse: string;
-}
-
-export interface InvEvent {
+export interface InvitationEvent {
 	posterUrl: string;
 	showTitle: string;
 	hostMessage: string;
@@ -15,7 +11,8 @@ export interface InvEvent {
 	specialInstructions: string;
 }
 
-export interface InvGuest {
+export interface InvitationResponse {
+	rsvpResponse: string;
 	dietaryPreferences: Array<string>;
 	specialDietaryRequests: string;
 }
