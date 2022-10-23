@@ -46,11 +46,7 @@
 		border-top: 1px solid #cfcbcb;
 	}
 
-	.border-trans {
-		border: 2px solid transparent;
-	}
-
-	.active-border {
+	.light-primary-line {
 		border: 2px solid #3f6ac4;
 	}
 
@@ -94,7 +90,7 @@
 		letter-spacing: 1.5px;
 	}
 
-	.national-body-sm {
+	.national-sm {
 		font-family: 'National 2';
 		font-weight: 400;
 		font-size: 12px;

@@ -6,8 +6,9 @@
 	import Hero from '$lib/hero/Hero.svelte';
 	import HostMessage from '$lib/host-message/HostMessage.svelte';
 	import EventDetails from '$lib/event-details/EventDetails.svelte';
-	import SpecialInstructions from '$lib/specialInstructions/SpecialInstructions.svelte';
+	import SpecialInstructions from '$lib/special-instructions/SpecialInstructions.svelte';
 	import Rsvp from '$lib/rsvp/Rsvp.svelte';
+	import Divider from '$lib/divider/Divider.svelte';
 
 	export let data: PageData;
 
@@ -22,7 +23,10 @@
 {#if data.status !== 200}
 	<CodeInput error={data.ret} />
 {:else}
-	<div class="bg-white pb-16 text-light/text shadow-lg shadow-black">
+	<div
+		id="invitation-wrapper"
+		class="bg-white pb-16 text-light/text shadow-lg shadow-black"
+	>
 		<Hero posterUrl={E.posterUrl} showTitle={E.showTitle} />
 		<HostMessage
 			hostMessage={E.hostMessage}
@@ -35,6 +39,7 @@
 			specialDietaryRequests={SPECIAL_DIETARY_REQUESTS}
 			code={data?.code}
 		/>
+		<Divider />
 		<EventDetails
 			eventTitle={E.eventTitle}
 			hostFirstName={E.hostFirstName}

@@ -2,7 +2,5 @@
 	import '../app.css';
 </script>
 
-<!-- max-w-md -->
-<main class="max-w-[375px]">
-	<slot />
-</main>
+<!-- ? Maybe change this to max-w-md -->
+<main class="max-w-[375px]"><slot /></main>

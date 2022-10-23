@@ -16,7 +16,7 @@
 		class="absolute bottom-[63px] h-[350px]"
 	/>
 	<div
-		class="national-body-sm absolute bottom-[60px] grid h-12 max-w-[231px] translate-y-[100%] place-items-start text-center tracking-[0.02em] text-dark/text"
+		class="national-sm absolute bottom-[60px] grid h-12 max-w-[231px] translate-y-[100%] place-items-start text-center tracking-[0.02em] text-dark/text"
 	>
 		<p>
 			{showTitle}

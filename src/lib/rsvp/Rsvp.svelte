@@ -77,8 +77,6 @@
 		specialDietaryRequests: specialDietaryRequests || ''
 	};
 
-	console.log(body);
-
 	let shadowBody: Body = body;
 
 	let msg: string = '';
@@ -246,7 +244,7 @@
 	/>
 
 	<!-- TODO: Use form actions with progressive enhancement -->
-	<form on:change={handleForm} class="flex w-full flex-col">
+	<form on:change={handleForm} class="w-full">
 		<div class="flex justify-between gap-4">
 			<Toggle
 				label="Yes"
@@ -278,11 +276,10 @@
 			<h2 class="mb-3 leading-6">Dietary preferences</h2>
 			<div class="flex flex-row flex-wrap justify-start gap-4 ">
 				{#each dietaryPreferencesInput as { label, id, value }}
-					<!-- TODO: Isolate to component -->
 					<label
 						for={id}
-						class="national-body-sm border-trans focus:active-border relative flex h-10 basis-[155.5px] place-items-center gap-2 whitespace-nowrap rounded-full bg-light/background p-3"
-						class:active-border={body.dietaryPreferences.includes(
+						class="national-sm focus:light-primary-line light-line relative flex h-10 basis-[155.5px] place-items-center gap-2 whitespace-nowrap rounded-full bg-light/background p-3"
+						class:light-primary-line={body.dietaryPreferences.includes(
 							value
 						)}
 					>
@@ -322,7 +319,7 @@
 			>
 				<label
 					for="specialDietaryRequests"
-					class="national-body-sm mx-3 mt-[10px] text-light/primary-text"
+					class="national-sm mx-3 mt-[10px] text-light/primary-text"
 				>
 					Special Dietary Requests
 				</label>

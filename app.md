@@ -53,6 +53,14 @@
     - Check form for edge cases & bugs
     - Check load times & other performance metrics
 
+## Invitation Codes
+- XQRN7D - Yes
+- H9K79U - No
+- CSKUK7 - Maybe
+- 4J9TP2
+- BQ9FAE
+- T7RSHR
+
 ## Form Flow
 
 - if No
@@ -108,11 +116,3 @@
                 - specialDietaryRequests
                     - Success response: “Excellent! Glad you can make it. We’ve notified [hostPreferredName] that you are coming, and we’ll let the chef know your dietary preferences.”
                     - Update response: “We’ve updated your response.”
-
-## Invitation Codes
-- XQRN7D - Yes
-- H9K79U - No
-- CSKUK7 - Maybe
-- 4J9TP2
-- BQ9FAE
-- T7RSHR

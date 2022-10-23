@@ -9,8 +9,8 @@
 
 <label
 	for={id}
-	class="national-body-sm border-trans focus:active-border relative grid h-10 grow basis-[40px] place-content-center rounded-full bg-light/background p-3"
-	class:active-border={rsvp === value}
+	class="national-sm light-line focus:light-primary-line relative grid h-10 grow basis-10 place-content-center rounded-full bg-light/background p-3"
+	class:light-primary-line={rsvp === value}
 >
 	{label}
 

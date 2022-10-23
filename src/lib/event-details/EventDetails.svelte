@@ -1,7 +1,7 @@
 <script lang="ts">
 	import { format } from 'date-fns';
-
 	import SectionHeader from '$lib/section-header/SectionHeader.svelte';
+	import Icon from './Icon.svelte';
 
 	export let eventTitle: string,
 		hostFirstName: string,
@@ -24,18 +24,11 @@
 </script>
 
 <section
-	class="grid justify-items-center bg-light/background-strong px-6 pb-10"
+	class="grid justify-items-center bg-light/background-strong px-6 pt-6 pb-10"
 >
-	<img src="/divider.svg" alt="" class="mb-6" />
 	<SectionHeader heading="Details" subheading="The Event" />
 	<article class="mt-6 mb-4 flex w-full flex-row items-start gap-[14px]">
-		<img
-			src="/ollie.png"
-			alt="Ollie icon."
-			width="20"
-			height="20"
-			class="my-[2px] h-5 w-5"
-		/>
+		<Icon src="ollie.png" alt="Ollie icon." />
 		<div>
 			<p>{eventTitle}</p>
 			<p class="text-light/text-weak">
@@ -45,13 +38,7 @@
 		</div>
 	</article>
 	<article class="my-4 flex w-full flex-row items-start gap-[14px]">
-		<img
-			src="/calendar.png"
-			alt="Calendar icon."
-			width="20"
-			height="20"
-			class="my-[2px] h-5 w-5"
-		/>
+		<Icon src="calendar.png" alt="Calendar icon." />
 		<div>
 			<p>{eventTitle}</p>
 			<p class="text-light/text-weak">
@@ -60,13 +47,7 @@
 		</div>
 	</article>
 	<article class="my-4 flex w-full flex-row items-start gap-[14px]">
-		<img
-			src="/pin.png"
-			alt="Pin icon."
-			width="20"
-			height="20"
-			class="my-[2px] h-5 w-5"
-		/>
+		<Icon src="pin.png" alt="Pin icon." />
 		<div>
 			<p>Metro Cinema Test Suite</p>
 			<p class="text-light/text-weak">3908 Avenue B, Austin, TX 78751</p>
