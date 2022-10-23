@@ -1,11 +1,27 @@
 # Metro Cinema Invitation
 
 ## Questions
+- The project spec says to use max-w-md (448px) while the designs max at 375px?
 - Should the event date adjust with timezones?
 
 ## To-do
 - Clean up styles
-- Polish
+- Clean up types
+- Refactor GET handling
+    - Check times in +page.server vs in browser
+- Refactor form handling
+    - Check timeouts
+    - Check messages
+    - +++ Switch to form actions
+- Responsive design
+- Test form for edge cases & bugs
+- Test for accessibility
+- Test for UX
+- Final performance check
+    - Get page load time
+    - Get data load time
+    - Get Lighthouse report
+- Document Project in README
 
 ## Timeline
 
@@ -25,16 +41,17 @@
     - Style form components
     - Finish form section
     - Start remaining sections
-- Sunday - Remaining sections
-    - Hero
-    - Host Message
-    - Event Details
-    - Special Instructions
+        - Hero
+        - Host Message
+        - Event Details
+        - Special Instructions
+- Sunday - Form & Polish
+    - Form data PUT
+    - Clean up code
 - Monday - Polish & Submit
-    - Check page for responsiveness
+    - Check page for responsiveness & UX
     - Check form for edge cases & bugs
     - Check load times & other performance metrics
-    - Verify good UX
 
 ## Form Flow
 
