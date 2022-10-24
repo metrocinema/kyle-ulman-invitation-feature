@@ -28,6 +28,9 @@ module.exports = {
 			},
 			boxShadow: {
 				hero: '0 -0.25rem 1rem #fde68a'
+			},
+			dropShadow: {
+				'long-title': '1px 1px 1px #1E1F21'
 			}
 		}
 	},

@@ -48,6 +48,10 @@
 		outline: 2px dashed #3f6ac4;
 	}
 
+	.long-title-background {
+		background-color: hsl(220 5% 12% / 0.75);
+	}
+
 	.icon {
 		width: 32px;
 		height: 32px;
