@@ -11,9 +11,11 @@ export function removeFocusBorder(e: Event) {
 }
 
 export function nudgeVisualInit() {
-	const nudgeVisualElement = document.querySelectorAll(
+	const nudgeVisualElements = document.querySelectorAll(
 		'.nudge-visual-element'
 	);
+
+	console.log(nudgeVisualElements);
 
 	let i = 0;
 	let nudgeVisualTimeout: ReturnType<typeof setTimeout> | undefined;
@@ -21,15 +23,15 @@ export function nudgeVisualInit() {
 	nudgeVisual();
 
 	function nudgeVisual() {
-		nudgeVisualElement[i].classList.add('focus');
+		nudgeVisualElements[i].classList.add('focus');
 		nudgeVisualTimeout = setTimeout(() => {
-			if (i < nudgeVisualElement.length) {
-				nudgeVisualElement[i].classList.remove('focus');
+			if (i < nudgeVisualElements.length - 1) {
+				nudgeVisualElements[i].classList.remove('focus');
 				i++;
 				nudgeVisual();
 			} else {
 				clearTimeout(nudgeVisualTimeout);
-				nudgeVisualElement[i].classList.remove('focus');
+				nudgeVisualElements[i].classList.remove('focus');
 				return;
 			}
 		}, 300);

@@ -1,10 +1,5 @@
 # Metro Cinema Invitation
 
-## Questions
-- The project spec says to use max-w-md (448px) while the designs max at 375px?
-- Should the event date adjust with timezones?
-- Will the code always absolutely contain 6 characters?
-
 ## To-do
 - Refactor form handling
     - Check timeouts
@@ -18,6 +13,10 @@
     - Get data load time
     - Get Lighthouse report
 - Document Project in README
+- Post-production
+    - Save shadow copy of "yes" response if user clicks "no" or "maybe" then back to "yes"
+    - Move form logic to actions
+    - Refactor status colors in msg
 
 ## Timeline
 

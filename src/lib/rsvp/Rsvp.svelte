@@ -1,4 +1,5 @@
 <script lang="ts">
+	import { error } from '@sveltejs/kit';
 	import { addFocusBorder, nudgeVisualInit, removeFocusBorder } from './';
 	import Toggle from './Toggle.svelte';
 	import SectionHeader from '$lib/section-header/SectionHeader.svelte';
@@ -33,7 +34,7 @@
 	const LOW_CARB: string = 'LOW_CARB';
 
 	// Timeout Durations (seconds)
-	const NUDGE_TIMEOUT_DURATION = 10;
+	const NUDGE_TIMEOUT_DURATION = 3;
 	const PUT_TIMEOUT_DURATION = 1.5;
 
 	interface DietaryPreferencesInput {
@@ -134,9 +135,12 @@
 					body: JSON.stringify(body)
 				}
 			);
-
 			const RET = await RES.json();
+
 			// Handle errors
+			if (RES.status !== 200) {
+				throw error(RES.status, { message: RET.errorMessage });
+			}
 
 			if (isPut === false && body.rsvpResponse === YES) {
 				msg = YES_MSG;
@@ -325,16 +329,22 @@
 				<textarea
 					name="specialDietaryRequests"
 					id="specialDietaryRequests"
-					class="focus:focus block w-full grow px-3 outline-none"
+					class="block w-full grow px-3 outline-none"
 					bind:value={body.specialDietaryRequests}
 					on:input={update}
-					on:focus={nudge.clear}
+					on:focus={addFocusBorder}
+					on:blur={removeFocusBorder}
 				/>
 			</div>
 		{/if}
 	</form>
 	{#if msg}
-		<p class="mt-4">
+		<!-- TODO: Make this less hacky -->
+		<p
+			class="mt-4"
+			class:text-orange-700={msg.includes('customize')}
+			class:text-green-700={msg.includes('Excellent')}
+		>
 			{msg}
 		</p>
 	{/if}
