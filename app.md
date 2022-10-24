@@ -67,7 +67,6 @@
         - 279ms
         - 333ms
         - 283ms
-    
 -   4J9TP2 - Blank
     - Direct load - 684ms
         - 1.36s
@@ -75,9 +74,6 @@
         - 585ms
         - 618ms
         - 586ms
-
-- For faster initial load
-    - Host image & fonts elsewhere
 
 ## Form Flow
 

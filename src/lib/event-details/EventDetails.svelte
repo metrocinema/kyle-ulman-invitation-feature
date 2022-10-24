@@ -10,7 +10,7 @@
 		eventDateEnd: string;
 
 	const eventDateStartDate: Date = new Date(eventDateStart);
-	let eventDateEndDate: Date = new Date(eventDateEnd);
+	const eventDateEndDate: Date = new Date(eventDateEnd);
 
 	const start: string = format(eventDateStartDate, 'eee, LLLL d, h:mmaaa');
 	let end: string = format(eventDateEndDate, 'h:mmaaa');
