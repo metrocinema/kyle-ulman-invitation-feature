@@ -6,8 +6,6 @@
 - Will the code always absolutely contain 6 characters?
 
 ## To-do
-- Refactor GET handling
-    - Check times in +page.server vs in browser
 - Refactor form handling
     - Check timeouts
     - Check messages
@@ -81,6 +79,9 @@
         - 585ms
         - 618ms
         - 586ms
+
+- For faster initial load
+    - Host image & fonts elsewhere
 
 ## Form Flow
 

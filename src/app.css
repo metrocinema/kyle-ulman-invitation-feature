@@ -32,20 +32,20 @@
 
 @layer base {
 	.light-line {
-		border: 1px solid #edeae9;
+		outline: 1px solid #edeae9;
 	}
 
-	.light-line-strong {
+	.light-line-strong-hr {
 		border-top: 1px solid #cfcbcb;
 	}
 
 	.light-primary-line,
 	.active {
-		border: 2px solid #3f6ac4;
+		outline: 2px solid #3f6ac4;
 	}
 
 	.focus {
-		border: 2px dashed #3f6ac4;
+		outline: 2px dashed #3f6ac4;
 	}
 
 	.icon {

@@ -1,5 +1,5 @@
 <script lang="ts">
-	import { addFocusBorder, removeFocusBorder } from './';
+	import { addFocusBorder, nudgeVisualInit, removeFocusBorder } from './';
 	import Toggle from './Toggle.svelte';
 	import SectionHeader from '$lib/section-header/SectionHeader.svelte';
 
@@ -31,6 +31,10 @@
 	const VEGAN: string = 'VEGAN';
 	const GLUTEN_FREE: string = 'GLUTEN_FREE';
 	const LOW_CARB: string = 'LOW_CARB';
+
+	// Timeout Durations (seconds)
+	const NUDGE_TIMEOUT_DURATION = 10;
+	const PUT_TIMEOUT_DURATION = 1.5;
 
 	interface DietaryPreferencesInput {
 		label: string;
@@ -95,7 +99,8 @@
 			clearTimeout(nudgeTimeout);
 			nudgeTimeout = setTimeout(() => {
 				msg = NUDGE_MSG;
-			}, 10 * 1000);
+				nudgeVisualInit();
+			}, 1000 * (NUDGE_TIMEOUT_DURATION - PUT_TIMEOUT_DURATION));
 		},
 		clear: () => {
 			clearTimeout(nudgeTimeout);
@@ -109,6 +114,7 @@
 		clearTimeout(putTimeout);
 
 		putTimeout = setTimeout(async () => {
+			// Check that user has selected at least "no restrictions"
 			if (
 				body.rsvpResponse === YES &&
 				body.dietaryPreferences.length < 1
@@ -116,8 +122,6 @@
 				nudge.set();
 				return;
 			}
-
-			// PUT body
 
 			const RES = await fetch(
 				`${import.meta.env.VITE_API_URL}/${code}/rsvp`,
@@ -132,9 +136,7 @@
 			);
 
 			const RET = await RES.json();
-
-			console.log(RES);
-			console.log(RET);
+			// Handle errors
 
 			if (isPut === false && body.rsvpResponse === YES) {
 				msg = YES_MSG;
@@ -150,7 +152,7 @@
 				msg = MAYBE_MSG;
 				return;
 			}
-		}, 1500);
+		}, PUT_TIMEOUT_DURATION * 1000);
 	}
 
 	function handleForm(e: Event) {
@@ -165,9 +167,6 @@
 		} else if (body.rsvpResponse === YES) {
 			iconName = 'smile';
 			msg = '';
-
-			// Nudge user to make a selection after 10 seconds of inactivtiy
-			if (body.dietaryPreferences.length === 0) nudge.set();
 
 			const clickedInput = e.target as HTMLInputElement;
 
@@ -244,7 +243,6 @@
 		class="icon"
 	/>
 
-	<!-- TODO: Use form actions with progressive enhancement -->
 	<form on:change={handleForm} class="w-full">
 		<div class="flex justify-between gap-4">
 			<Toggle
@@ -273,13 +271,13 @@
 			/>
 		</div>
 		{#if body.rsvpResponse === YES}
-			<hr class="light-line-strong my-6" />
+			<hr class="light-line-strong-hr my-6" />
 			<h2 class="mb-3 leading-6">Dietary preferences</h2>
-			<div class="flex flex-row flex-wrap justify-start gap-4 ">
+			<div class="flex flex-row flex-wrap justify-start gap-4">
 				{#each dietaryPreferencesInput as { label, id, value }}
 					<label
 						for={id}
-						class="national-sm light-line relative flex h-10 basis-[155.5px] place-items-center gap-2 whitespace-nowrap rounded-full bg-light/background p-3"
+						class="nudge-visual-element national-sm light-line relative flex h-10 basis-[155.5px] place-items-center gap-2 whitespace-nowrap rounded-full bg-light/background p-3 transition-[outline] duration-500"
 						class:active={body.dietaryPreferences.includes(value)}
 					>
 						<div
@@ -316,7 +314,7 @@
 				Allergies and special dietary requests.
 			</h2>
 			<div
-				class="light-line flex min-h-[120px] flex-col overflow-hidden rounded-[6px] bg-light/background"
+				class="nudge-visual-element light-line flex min-h-[120px] flex-col overflow-hidden rounded-[6px] bg-light/background transition-[outline] duration-300"
 			>
 				<label
 					for="specialDietaryRequests"

@@ -40,8 +40,7 @@
 	<article class="my-4 flex w-full flex-row items-start gap-[14px]">
 		<Icon src="calendar.webp" alt="Calendar icon." />
 		<div>
-			<p>{eventTitle}</p>
-			<p class="text-light/text-weak">
+			<p>
 				{eventDateFmt}
 			</p>
 		</div>
