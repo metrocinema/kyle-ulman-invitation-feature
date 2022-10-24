@@ -28,7 +28,7 @@
 >
 	<SectionHeader heading="Details" subheading="The Event" />
 	<article class="mt-6 mb-4 flex w-full flex-row items-start gap-[14px]">
-		<Icon src="ollie.png" alt="Ollie icon." />
+		<Icon src="ollie.webp" alt="Ollie icon." />
 		<div>
 			<p>{eventTitle}</p>
 			<p class="text-light/text-weak">
@@ -38,7 +38,7 @@
 		</div>
 	</article>
 	<article class="my-4 flex w-full flex-row items-start gap-[14px]">
-		<Icon src="calendar.png" alt="Calendar icon." />
+		<Icon src="calendar.webp" alt="Calendar icon." />
 		<div>
 			<p>{eventTitle}</p>
 			<p class="text-light/text-weak">
@@ -47,7 +47,7 @@
 		</div>
 	</article>
 	<article class="my-4 flex w-full flex-row items-start gap-[14px]">
-		<Icon src="pin.png" alt="Pin icon." />
+		<Icon src="pin.webp" alt="Pin icon." />
 		<div>
 			<p>Metro Cinema Test Suite</p>
 			<p class="text-light/text-weak">3908 Avenue B, Austin, TX 78751</p>

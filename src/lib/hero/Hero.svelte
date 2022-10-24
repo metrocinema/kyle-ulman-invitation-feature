@@ -4,7 +4,7 @@
 
 <section class="relative flex flex-col items-center">
 	<img
-		src="/background.png"
+		src="/background.webp"
 		alt="Hero background."
 		width="375"
 		height="765"

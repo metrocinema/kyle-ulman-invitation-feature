@@ -237,7 +237,7 @@
 >
 	<SectionHeader heading="Are You Going?" subheading="Please RSVP" />
 	<img
-		src={`/${iconName}.png`}
+		src={`/${iconName}.webp`}
 		alt="Question mark"
 		width="32"
 		height="32"
@@ -290,7 +290,7 @@
 						>
 							{#if body.dietaryPreferences.includes(value)}
 								<img
-									src="/check.png"
+									src="/check.webp"
 									alt="Check mark."
 									width="12"
 									height="8"

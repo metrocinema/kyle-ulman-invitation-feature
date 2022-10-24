@@ -32,6 +32,7 @@
 		<a
 			href={`${import.meta.env.VITE_CLIENT_URL}/${code}`}
 			class="underline"
+			data-sveltekit-prefetch
 		>
 			{import.meta.env.VITE_CLIENT_URL}/{code}
 		</a>

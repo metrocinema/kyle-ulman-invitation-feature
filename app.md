@@ -11,7 +11,6 @@
 - Refactor form handling
     - Check timeouts
     - Check messages
-    - +++ Switch to form actions
 - Responsive design
 - Test form for edge cases & bugs
 - Test for accessibility
@@ -59,6 +58,14 @@
 - 4J9TP2
 - BQ9FAE
 - T7RSHR
+
+## Load Times
+-   XQRN7D - Yes
+    - From CodeInput + prefetch
+        - 541ms
+-   H9K79U - No
+-   CSKUK7 - Maybe
+-   4J9TP2 - Blank
 
 ## Form Flow
 

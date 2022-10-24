@@ -1,10 +1,8 @@
-import type { PageServerLoad } from './$types';
+import type { PageLoad } from './$types';
 
 import { error } from '@sveltejs/kit';
 
-export const load: PageServerLoad = async ({ params, fetch }) => {
-	const start = performance.now(); // ! TESTING
-
+export const load: PageLoad = async ({ params, fetch }) => {
 	const CODE: string = params.invitationCode;
 
 	if (CODE.length !== 6) {
@@ -20,5 +18,5 @@ export const load: PageServerLoad = async ({ params, fetch }) => {
 		throw error(RES.status, { message: RET.errorMessage });
 	}
 
-	return { ...RET.data, code: CODE, start };
+	return { ...RET.data, code: CODE };
 };

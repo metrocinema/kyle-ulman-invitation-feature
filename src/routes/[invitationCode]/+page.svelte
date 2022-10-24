@@ -8,7 +8,6 @@
 	import HostMessage from '$lib/host-message/HostMessage.svelte';
 	import Rsvp from '$lib/rsvp/Rsvp.svelte';
 	import SpecialInstructions from '$lib/special-instructions/SpecialInstructions.svelte';
-	import { onMount } from 'svelte';
 
 	export let data: PageData;
 
@@ -32,15 +31,6 @@
 	}: InvitationResponse = data?.guest || "";
 
 	const { rsvpResponse }: InvitationResponse = data?.invitation;
-
-	onMount(() => {
-		const end = performance.now(); // ! TESTING
-
-		console.log(data?.start, end);
-
-		const time = end - data?.start;
-		console.log(`Time: ${time.toFixed(2)}ms`);
-	});
 </script>
 
 <div
