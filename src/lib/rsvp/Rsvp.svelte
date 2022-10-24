@@ -275,17 +275,17 @@
 			/>
 		</div>
 		{#if body.rsvpResponse === YES}
-			<hr class="light-line-strong-hr my-6" />
+			<hr class="my-6 border-t border-light/line-strong" />
 			<h2 class="mb-3 leading-6">Dietary preferences</h2>
-			<div class="flex flex-row flex-wrap justify-start gap-4">
+			<div class="grid grid-cols-1 gap-4 370:grid-cols-2">
 				{#each dietaryPreferencesInput as { label, id, value }}
 					<label
 						for={id}
-						class="nudge-visual-element national-sm light-line relative flex h-10 basis-[155.5px] place-items-center gap-2 whitespace-nowrap rounded-full bg-light/background p-3 transition-[outline] duration-500"
+						class="nudge-visual-element national-sm light-line relative flex h-10 min-w-[150px] place-items-center gap-2 whitespace-nowrap rounded-full bg-light/background p-3 transition-[outline] duration-500"
 						class:active={body.dietaryPreferences.includes(value)}
 					>
 						<div
-							class="light-line grid h-6 w-6 place-items-center rounded-full"
+							class="light-line min-h-6 min-w-6 grid h-6 w-6 place-items-center rounded-full"
 							class:bg-active-clr={body.dietaryPreferences.includes(
 								value
 							)}

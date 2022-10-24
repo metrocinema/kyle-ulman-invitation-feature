@@ -1,9 +1,6 @@
 # Metro Cinema Invitation
 
 ## To-do
-- Refactor form handling
-    - Check timeouts
-    - Check messages
 - Responsive design
 - Test form for edge cases & bugs
 - Test for accessibility

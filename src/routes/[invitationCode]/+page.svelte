@@ -31,6 +31,11 @@
 	}: InvitationResponse = data?.guest || "";
 
 	const { rsvpResponse }: InvitationResponse = data?.invitation;
+
+	const string = `Don't Be A Menace To South Central While Drinking Your Juice In The
+				Hood. A third and fourth line if it's the longest`;
+
+	console.log(string.length);
 </script>
 
 <div

@@ -17,10 +17,17 @@ module.exports = {
 				'light/icon': '#6D6E6F', // grey
 				'light/primary-line': '#3F6AC4', // blue
 				'light/line': '#EDEAE9', // grey
+				'light/line-strong': '#CFCBCB',
 				'light/primary-text': '#3F6AC4', // blue
 				'light/text-weak': '#6D6E6F', // grey
 				'dark/background': '#1E1F21', // dark
-				'active-clr': '#3F6AC4'
+				'active-clr': '#3F6AC4' // blue
+			},
+			screens: {
+				370: '370px'
+			},
+			boxShadow: {
+				hero: '0 -0.25rem 1rem #fde68a'
 			}
 		}
 	},
