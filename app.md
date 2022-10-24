@@ -3,9 +3,9 @@
 ## Questions
 - The project spec says to use max-w-md (448px) while the designs max at 375px?
 - Should the event date adjust with timezones?
+- Will the code always absolutely contain 6 characters?
 
 ## To-do
-- Clean up types
 - Refactor GET handling
     - Check times in +page.server vs in browser
 - Refactor form handling
