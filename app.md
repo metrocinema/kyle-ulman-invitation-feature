@@ -60,12 +60,27 @@
 - T7RSHR
 
 ## Load Times
--   XQRN7D - Yes
-    - From CodeInput + prefetch
-        - 541ms
--   H9K79U - No
--   CSKUK7 - Maybe
+-   XQRN7D - Yes with prefilled data
+    - Direct load - 747ms
+        - 1.96s
+        - 745ms
+        - 632ms    
+        - 678ms
+        - 584ms
+    - From CodeInput - prefetch - 311ms
+        - 289ms
+        - 371ms
+        - 279ms
+        - 333ms
+        - 283ms
+    
 -   4J9TP2 - Blank
+    - Direct load - 684ms
+        - 1.36s
+        - 595ms
+        - 585ms
+        - 618ms
+        - 586ms
 
 ## Form Flow
 
