@@ -1,22 +1,24 @@
 import type { PageServerLoad } from './$types';
 
+import { error } from '@sveltejs/kit';
+
 export const load: PageServerLoad = async ({ params, fetch }) => {
-	const code: string = params.invitationCode;
+	const start = performance.now(); // ! TESTING
 
-	if (code.length !== 6) {
-		return {
-			status: 400,
-			ret: `No invitation found with code ${code}`,
-			code
-		};
+	const CODE: string = params.invitationCode;
+
+	if (CODE.length !== 6) {
+		throw error(400, {
+			message: `No invitation found with code '${CODE}'`
+		});
 	}
 
-	const res = await fetch(`${import.meta.env.VITE_API_URL}/${code}`);
-	const ret = await res.json();
+	const RES = await fetch(`${import.meta.env.VITE_API_URL}/${CODE}`);
+	const RET = await RES.json();
 
-	if (res.status !== 200) {
-		return { status: res.status, ret: ret.errorMessage, code };
+	if (RES.status !== 200) {
+		throw error(RES.status, { message: RET.errorMessage });
 	}
 
-	return { status: 200, ret, code };
+	return { ...RET.data, code: CODE, start };
 };

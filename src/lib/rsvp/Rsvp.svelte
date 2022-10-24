@@ -6,8 +6,8 @@
 	export let hostPreferredName: string,
 		code: string | undefined,
 		rsvpResponse: string,
-		dietaryPreferences: Array<string>,
-		specialDietaryRequests: string;
+		dietaryPreferences: Array<string> | undefined,
+		specialDietaryRequests: string | undefined;
 
 	let iconName: string = 'question';
 
