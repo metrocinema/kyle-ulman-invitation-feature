@@ -4,6 +4,11 @@
 	import Toggle from './Toggle.svelte';
 	import SectionHeader from '$lib/section-header/SectionHeader.svelte';
 	import { browser } from '$app/environment';
+	import check from '$lib/assets/check.webp';
+	import question from '$lib/assets/question.webp';
+	import frown from '$lib/assets/frown.webp';
+	import meh from '$lib/assets/meh.webp';
+	import smile from '$lib/assets/smile.webp';
 
 	export let hostPreferredName: string,
 		code: string | undefined,
@@ -11,7 +16,7 @@
 		dietaryPreferences: Array<string> | undefined,
 		specialDietaryRequests: string | undefined;
 
-	let iconName: string = 'question';
+	let icon = question;
 
 	// Messages
 	const MSGS = {
@@ -199,14 +204,14 @@
 	function handleForm(e: Event) {
 		if (body.rsvpResponse === NO) {
 			nudge.clear();
-			iconName = 'frown';
+			icon = frown;
 			resetPrefs();
 		} else if (body.rsvpResponse === MAYBE) {
 			nudge.clear();
-			iconName = 'meh';
+			icon = meh;
 			resetPrefs();
 		} else if (body.rsvpResponse === YES) {
-			iconName = 'smile';
+			icon = smile;
 			msg = undefined;
 
 			const clickedInput = e.target as HTMLInputElement;
@@ -302,13 +307,7 @@
 	class="grid justify-items-center bg-light/background-strong px-6 pb-6 pt-10"
 >
 	<SectionHeader heading="Are You Going?" subheading="Please RSVP" />
-	<img
-		src={`/${iconName}.webp`}
-		alt="Question mark"
-		width="32"
-		height="32"
-		class="icon"
-	/>
+	<img src={icon} alt="Question mark" width="32" height="32" class="icon" />
 
 	<form on:change={handleForm} class="w-full">
 		<div class="flex justify-between gap-4">
@@ -355,7 +354,7 @@
 						>
 							{#if body.dietaryPreferences.includes(value)}
 								<img
-									src="/check.webp"
+									src={check}
 									alt="Check mark."
 									width="12"
 									height="8"

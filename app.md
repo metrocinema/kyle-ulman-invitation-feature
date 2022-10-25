@@ -23,7 +23,21 @@
         - Edge cases:
             - If currently saving, warn user if they try to exit/reload
     - Test for accessibility
+        - Form is tabbable
+        - Add page title
+        - Clear focus indicator
+        - Interactive elements indicate their purpose & state (ie: labels for input elements)
+        - clear dialogs
+        - focus doesn't get trapped
+        - custom controls/ARIA - since we're using inputs & labels, we don't need ARIA labels
+        - visual order follows DOM order
+        - offscreen content is hidden from assistive devices
+        - semantic html
     - Test for UX
+        - Cache assets dynamically with Vite
+        - Set cache policy for static assets
+        - Largest Contentful Paint within standard
+        - Manage Layout shifts
 - Final performance check
     - Get page load time
     - Get data load time

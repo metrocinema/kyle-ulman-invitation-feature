@@ -1,4 +1,6 @@
 <script type="ts">
+	import background from '$lib/assets/background.webp';
+
 	export let posterUrl: string, showTitle: string;
 
 	// prettier-ignore
@@ -12,12 +14,7 @@
 
 <section class="flex flex-col items-center bg-light/background">
 	<figure class="relative flex max-w-[375px] flex-col items-center">
-		<img
-			src="/background.webp"
-			alt="Hero background."
-			width="375"
-			height="765"
-		/>
+		<img src={background} alt="Hero background." width="375" height="765" />
 		<img
 			src={posterUrl}
 			alt="Film poster."

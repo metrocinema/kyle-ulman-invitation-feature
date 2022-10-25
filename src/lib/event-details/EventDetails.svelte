@@ -3,6 +3,9 @@
 	const { formatInTimeZone } = pkg;
 	import SectionHeader from '$lib/section-header/SectionHeader.svelte';
 	import Icon from './Icon.svelte';
+	import ollie from '$lib/assets/ollie.webp';
+	import calendar from '$lib/assets/calendar.webp';
+	import pin from '$lib/assets/pin.webp';
 
 	export let eventTitle: string,
 		hostFirstName: string,
@@ -46,7 +49,7 @@
 >
 	<SectionHeader heading="Details" subheading="The Event" />
 	<article class="mt-6 mb-4 flex w-full flex-row items-start gap-[14px]">
-		<Icon src="ollie.webp" alt="Ollie icon." />
+		<Icon src={ollie} alt="Ollie icon." />
 		<div>
 			<p>{eventTitle}</p>
 			<p class="text-light/text-weak">
@@ -56,7 +59,7 @@
 		</div>
 	</article>
 	<article class="my-4 flex w-full flex-row items-start gap-[14px]">
-		<Icon src="calendar.webp" alt="Calendar icon." />
+		<Icon src={calendar} alt="Calendar icon." />
 		<div>
 			<p>
 				{eventDateFmt}
@@ -64,7 +67,7 @@
 		</div>
 	</article>
 	<article class="my-4 flex w-full flex-row items-start gap-[14px]">
-		<Icon src="pin.webp" alt="Pin icon." />
+		<Icon src={pin} alt="Pin icon." />
 		<div>
 			<p>Metro Cinema Test Suite</p>
 			<p class="text-light/text-weak">3908 Avenue B, Austin, TX 78751</p>
