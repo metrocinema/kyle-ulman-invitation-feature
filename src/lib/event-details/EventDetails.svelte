@@ -1,5 +1,5 @@
 <script lang="ts">
-	import { format } from 'date-fns';
+	import { formatInTimeZone } from 'date-fns-tz';
 	import SectionHeader from '$lib/section-header/SectionHeader.svelte';
 	import Icon from './Icon.svelte';
 
@@ -12,12 +12,29 @@
 	const eventDateStartDate: Date = new Date(eventDateStart);
 	const eventDateEndDate: Date = new Date(eventDateEnd);
 
-	const start: string = format(eventDateStartDate, 'eee, LLLL d, h:mmaaa');
-	let end: string = format(eventDateEndDate, 'h:mmaaa');
+	const start: string = formatInTimeZone(
+		eventDateStartDate,
+		'America/Chicago',
+		'eee, LLLL d, h:mmaaa'
+	);
 
+	let end: string = formatInTimeZone(
+		eventDateEndDate,
+		'America/Chicago',
+		'h:mmaaa'
+	);
+
+	// TODO: This compares device-local time, which may not always
+	// TODO: accurately reflect the time difference of the event.
+	// TODO: This is ok for now, since it's just an aesthetic
+	// TODO: change, the correct date/time will always display.
 	if (eventDateStartDate.getDate() < eventDateEndDate.getDate()) {
 		// If date spans more than one day, display full event end date
-		end = format(eventDateEndDate, 'eee, LLLL d, h:mmaaa');
+		end = formatInTimeZone(
+			eventDateEndDate,
+			'America/Chicago',
+			'eee, LLLL d, h:mmaaa'
+		);
 	}
 
 	let eventDateFmt = start + ' - ' + end;
