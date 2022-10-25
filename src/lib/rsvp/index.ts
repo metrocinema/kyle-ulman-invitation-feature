@@ -15,8 +15,6 @@ export function nudgeVisualInit() {
 		'.nudge-visual-element'
 	);
 
-	console.log(nudgeVisualElements);
-
 	let i = 0;
 	let nudgeVisualTimeout: ReturnType<typeof setTimeout> | undefined;
 

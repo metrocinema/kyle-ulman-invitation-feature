@@ -1,19 +1,21 @@
 # Metro Cinema Invitation
 
 ## To-do
-- Responsive design
-- Test form for edge cases & bugs
-- Test for accessibility
-- Test for UX
+- Polish
+    - Cache the GET response
+- Testing
+    - Check form for edge cases & bugs
+    - Test for accessibility
+    - Test for UX
 - Final performance check
     - Get page load time
     - Get data load time
     - Get Lighthouse report
-- Document Project in README
+- Write documentation
+
 - Post-production
     - Save shadow copy of "yes" response if user clicks "no" or "maybe" then back to "yes"
     - Move form logic to actions
-    - Refactor status colors in msg
 
 ## Timeline
 
@@ -40,10 +42,15 @@
 - Sunday - Form & Polish
     - Form data PUT
     - Clean up code
-- Monday - Polish & Submit
+- Monday 
+    - Make page responsive
+    - Hero
+- +Tuesday - Polish & Submit
+    - Test for accessibility
     - Check page for responsiveness & UX
     - Check form for edge cases & bugs
     - Check load times & other performance metrics
+    - Documentation
 
 ## Invitation Codes
 - XQRN7D - Yes

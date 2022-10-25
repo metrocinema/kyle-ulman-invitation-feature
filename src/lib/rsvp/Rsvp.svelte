@@ -13,13 +13,32 @@
 	let iconName: string = 'question';
 
 	// Messages
-	// prettier-ignore
-	const NUDGE_MSG = `We need to know your dietary preferences so that we can customize the menu to meet your needs.`;
-	const SAVING_MSG = `Saving your response...`;
-	const YES_MSG = `Excellent! Glad you can make it. We've notified ${hostPreferredName} that you are coming, and we'll let the chef know your dietary preferences.`;
-	const NO_MSG = `Sorry you can't make it. We've notified ${hostPreferredName}, and hopefully we'll see you next time.`;
-	const MAYBE_MSG = `We've notified ${hostPreferredName}. Please make a decision soon, since we need a final head count as soon as possible.`;
-	const UPDATE_MSG = `We've updated your response.`;
+	const MSGS = {
+		nudge: {
+			label: 'nudge',
+			msg: `We need to know your dietary preferences so that we can customize the menu to meet your needs.`
+		},
+		saving: {
+			label: 'saving',
+			msg: `Saving your response...`
+		},
+		yes: {
+			label: 'yes',
+			msg: `Excellent! Glad you can make it. We've notified ${hostPreferredName} that you are coming, and we'll let the chef know your dietary preferences.`
+		},
+		no: {
+			label: 'no',
+			msg: `Sorry you can't make it. We've notified ${hostPreferredName}, and hopefully we'll see you next time.`
+		},
+		maybe: {
+			label: 'maybe',
+			msg: `We've notified ${hostPreferredName}. Please make a decision soon, since we need a final head count as soon as possible.`
+		},
+		update: {
+			label: 'update',
+			msg: `We've updated your response.`
+		}
+	};
 
 	// RSVP
 	const YES: string = 'YES';
@@ -85,7 +104,12 @@
 
 	let shadowBody: Body = body;
 
-	let msg: string = '';
+	interface Msg {
+		label: string;
+		msg: string;
+	}
+
+	let msg: Msg | string = '';
 	let isPut: boolean = false;
 	let nudgeTimeout: ReturnType<typeof setTimeout> | undefined;
 	let putTimeout: ReturnType<typeof setTimeout>;
@@ -99,7 +123,7 @@
 		set: () => {
 			clearTimeout(nudgeTimeout);
 			nudgeTimeout = setTimeout(() => {
-				msg = NUDGE_MSG;
+				msg = MSGS.nudge;
 				nudgeVisualInit();
 			}, 1000 * (NUDGE_TIMEOUT_DURATION - PUT_TIMEOUT_DURATION));
 		},
@@ -110,7 +134,7 @@
 	};
 
 	function update() {
-		msg = SAVING_MSG;
+		msg = MSGS.saving;
 
 		clearTimeout(putTimeout);
 
@@ -143,17 +167,17 @@
 			}
 
 			if (isPut === false && body.rsvpResponse === YES) {
-				msg = YES_MSG;
+				msg = MSGS.yes;
 				isPut = true;
 			} else {
-				msg = UPDATE_MSG;
+				msg = MSGS.update;
 			}
 
 			if (body.rsvpResponse === NO) {
-				msg = NO_MSG;
+				msg = MSGS.no;
 				return;
 			} else if (body.rsvpResponse === MAYBE) {
-				msg = MAYBE_MSG;
+				msg = MSGS.maybe;
 				return;
 			}
 		}, PUT_TIMEOUT_DURATION * 1000);
@@ -338,14 +362,13 @@
 			</div>
 		{/if}
 	</form>
-	{#if msg}
-		<!-- TODO: Make this less hacky -->
+	{#if typeof msg === 'object'}
 		<p
 			class="mt-4"
-			class:text-orange-700={msg.includes('customize')}
-			class:text-green-700={msg.includes('Excellent')}
+			class:text-orange-700={msg.label && msg.label === 'nudge'}
+			class:text-green-700={msg.label === 'yes'}
 		>
-			{msg}
+			{msg.msg}
 		</p>
 	{/if}
 </section>
