@@ -148,57 +148,68 @@
 		}
 	};
 
-	function update() {
+	async function putResponse(body: Body) {
+		const RES = await fetch(
+			`${import.meta.env.VITE_API_URL}/${code}/rsvp`,
+			{
+				method: 'PUT',
+				headers: {
+					'content-type': 'application/json',
+					accept: 'application/json'
+				},
+				body: JSON.stringify(body)
+			}
+		);
+		const RET = await RES.json();
+
+		// Handle errors
+		if (RES.status !== 200) {
+			throw error(RES.status, { message: RET.errorMessage });
+		}
+
+		return true;
+	}
+
+	async function update() {
 		msg = MSGS.saving;
 
 		clearTimeout(putTimeout);
 
-		putTimeout = setTimeout(async () => {
-			// Check that user has selected at least "no restrictions"
-			if (
-				body.rsvpResponse === YES &&
-				body.dietaryPreferences.length < 1
-			) {
-				nudge.set();
-				return;
-			}
-
-			// ! Use to reset form
-			// body.rsvpResponse = 'UNKNOWN';
-
-			const RES = await fetch(
-				`${import.meta.env.VITE_API_URL}/${code}/rsvp`,
-				{
-					method: 'PUT',
-					headers: {
-						'content-type': 'application/json',
-						accept: 'application/json'
-					},
-					body: JSON.stringify(body)
+		if (body.rsvpResponse === YES) {
+			putTimeout = setTimeout(async () => {
+				// Check that user has selected at least "no restrictions"
+				if (
+					body.rsvpResponse === YES &&
+					body.dietaryPreferences.length < 1
+				) {
+					nudge.set();
+					return;
 				}
-			);
-			const RET = await RES.json();
 
-			// Handle errors
-			if (RES.status !== 200) {
-				throw error(RES.status, { message: RET.errorMessage });
-			}
+				const isSuccess = await putResponse(body);
 
-			if (isPut === false && body.rsvpResponse === YES) {
-				msg = MSGS.yes;
-				isPut = true;
-			} else {
-				msg = MSGS.update;
-			}
-
-			if (body.rsvpResponse === NO) {
+				if (isSuccess === true) {
+					if (isPut === false) {
+						msg = MSGS.yes;
+						isPut = true;
+					} else {
+						msg = MSGS.update;
+					}
+				}
+			}, PUT_TIMEOUT_DURATION * 1000);
+		} else if (body.rsvpResponse === NO) {
+			const isSuccess = await putResponse(body);
+			if (isSuccess === true) {
 				msg = MSGS.no;
-				return;
-			} else if (body.rsvpResponse === MAYBE) {
-				msg = MSGS.maybe;
-				return;
 			}
-		}, PUT_TIMEOUT_DURATION * 1000);
+			return;
+		} else if (body.rsvpResponse === MAYBE) {
+			const isSuccess = await putResponse(body);
+			if (isSuccess === true) {
+				msg = MSGS.maybe;
+			}
+			return;
+		}
 	}
 
 	function handleForm(e: Event) {

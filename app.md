@@ -11,7 +11,7 @@
             - +no restrictions...+low carb
                 - +veggie/vegan toggles
                 - +choices -> +no restricts -> choices 
-                - PUT response, display yes | update msg
+                - PUT response after 1.5s, display yes | update msg
                 - +special dietary requests
                     - PUT response, display update msg
         - +no
