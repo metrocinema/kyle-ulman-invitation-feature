@@ -1,14 +1,14 @@
 <script lang="ts">
 	import { error } from '@sveltejs/kit';
-	import { addFocusBorder, nudgeVisualInit, removeFocusBorder } from './';
-	import Toggle from './Toggle.svelte';
-	import SectionHeader from '$lib/section-header/SectionHeader.svelte';
 	import { browser } from '$app/environment';
+	import Toggle from './Toggle.svelte';
 	import check from '$lib/assets/check.webp';
-	import question from '$lib/assets/question.webp';
-	import frown from '$lib/assets/frown.webp';
 	import meh from '$lib/assets/meh.webp';
+	import frown from '$lib/assets/frown.webp';
+	import question from '$lib/assets/question.webp';
 	import smile from '$lib/assets/smile.webp';
+	import SectionHeader from '$lib/section-header/SectionHeader.svelte';
+	import { addFocusBorder, nudgeVisualInit, removeFocusBorder } from './';
 
 	export let hostPreferredName: string,
 		code: string | undefined,
@@ -16,9 +16,26 @@
 		dietaryPreferences: Array<string> | undefined,
 		specialDietaryRequests: string | undefined;
 
-	let icon = question;
+	// * Type Declarations
+	interface Msg {
+		label: string;
+		msg: string;
+	}
 
-	// Messages
+	interface DietaryPreferencesInput {
+		label: string;
+		id: string;
+		value: string;
+	}
+
+	interface Body {
+		rsvpResponse: string | undefined;
+		dietaryPreferences: Array<string>;
+		specialDietaryRequests: string;
+	}
+
+	// * Constants
+	// Feedback Messages
 	const MSGS = {
 		nudge: {
 			label: 'nudge',
@@ -46,22 +63,7 @@
 		}
 	};
 
-	interface Msg {
-		label: string;
-		msg: string;
-	}
-
-	let msg: Msg | undefined = undefined;
-
-	if (rsvpResponse === 'NO') {
-		msg = MSGS.no;
-	} else if (rsvpResponse === 'MAYBE') {
-		msg = MSGS.maybe;
-	} else if (rsvpResponse === 'YES') {
-		msg = MSGS.yes;
-	}
-
-	// RSVP
+	// RSVP Responses
 	const YES: string = 'YES';
 	const NO: string = 'NO';
 	const MAYBE: string = 'MAYBE';
@@ -73,17 +75,8 @@
 	const GLUTEN_FREE: string = 'GLUTEN_FREE';
 	const LOW_CARB: string = 'LOW_CARB';
 
-	// Timeout Durations (seconds)
-	const NUDGE_TIMEOUT_DURATION = 10;
-	const PUT_TIMEOUT_DURATION = 1.5;
-
-	interface DietaryPreferencesInput {
-		label: string;
-		id: string;
-		value: string;
-	}
-
-	let dietaryPreferencesInput: Array<DietaryPreferencesInput> = [
+	// Dietary Preference Inputs
+	const DIETARY_PREFERENCE_INPUTS: Array<DietaryPreferencesInput> = [
 		{
 			label: 'No Restrictions',
 			id: NO_RESTRICTIONS,
@@ -111,10 +104,23 @@
 		}
 	];
 
-	interface Body {
-		rsvpResponse: string | undefined;
-		dietaryPreferences: Array<string>;
-		specialDietaryRequests: string;
+	// Timeout Durations (seconds)
+	const NUDGE_TIMEOUT_DURATION = 10;
+	const PUT_TIMEOUT_DURATION = 1.5;
+
+	// * Init
+	let icon: string = question;
+	let msg: Msg | undefined = undefined;
+
+	if (rsvpResponse === 'NO') {
+		icon = frown;
+		msg = MSGS.no;
+	} else if (rsvpResponse === 'MAYBE') {
+		icon = meh;
+		msg = MSGS.maybe;
+	} else if (rsvpResponse === 'YES') {
+		icon = smile;
+		msg = MSGS.yes;
 	}
 
 	let body: Body = {
@@ -123,13 +129,13 @@
 		specialDietaryRequests: specialDietaryRequests || ''
 	};
 
-	let shadowBody: Body = body;
+	let shallowBody: Body = body; // Used to save shallow copy of selections
+	let isPut: boolean = false; // Used to determine whether to display success or update message
+	let nudgeTimeout: ReturnType<typeof setTimeout> | undefined = undefined;
+	let putTimeout: ReturnType<typeof setTimeout> | undefined = undefined;
 
-	let isPut: boolean = false;
-	let nudgeTimeout: ReturnType<typeof setTimeout> | undefined;
-	let putTimeout: ReturnType<typeof setTimeout>;
-
-	async function resetPrefs() {
+	// * Functions
+	function resetDietaryPreferences() {
 		body.dietaryPreferences = [];
 		body.specialDietaryRequests = '';
 	}
@@ -139,7 +145,7 @@
 			clearTimeout(nudgeTimeout);
 			nudgeTimeout = setTimeout(() => {
 				msg = MSGS.nudge;
-				nudgeVisualInit();
+				nudgeVisualInit(); // Highlight inputs animation
 			}, 1000 * (NUDGE_TIMEOUT_DURATION - PUT_TIMEOUT_DURATION));
 		},
 		clear: () => {
@@ -216,11 +222,11 @@
 		if (body.rsvpResponse === NO) {
 			nudge.clear();
 			icon = frown;
-			resetPrefs();
+			resetDietaryPreferences();
 		} else if (body.rsvpResponse === MAYBE) {
 			nudge.clear();
 			icon = meh;
-			resetPrefs();
+			resetDietaryPreferences();
 		} else if (body.rsvpResponse === YES) {
 			icon = smile;
 			msg = undefined;
@@ -231,20 +237,17 @@
 			if (clickedInput.id === NO_RESTRICTIONS) {
 				nudge.clear();
 
-				// checked
+				// Toggle "no restrictions"/...other selections
 				if (clickedInput.checked === true) {
 					body.dietaryPreferences = [NO_RESTRICTIONS];
-				}
-				// unchecked
-				else {
-					// reload shadow selection
+				} else {
 					body = {
 						...body,
-						dietaryPreferences: shadowBody.dietaryPreferences
+						dietaryPreferences: shallowBody.dietaryPreferences
 					};
 				}
 			}
-			// Any other dietaryPreferencesInput are clicked & no restrictions has check
+			// Any other dietary preference inputs are clicked
 			else if (
 				new RegExp(
 					`${VEGETARIAN}|${VEGAN}|${GLUTEN_FREE}|${LOW_CARB}`,
@@ -253,12 +256,14 @@
 			) {
 				nudge.clear();
 
+				// Remove "no restrictions" from selection
 				if (body.dietaryPreferences.includes(NO_RESTRICTIONS)) {
 					body.dietaryPreferences = body.dietaryPreferences.filter(
 						(pref) => pref !== NO_RESTRICTIONS
 					);
 				}
 
+				// Toggle vegetarian/vegan
 				if (
 					clickedInput.id === VEGETARIAN &&
 					clickedInput.checked === true
@@ -277,16 +282,18 @@
 					);
 				}
 
-				shadowBody = {
-					...shadowBody,
+				// Set shallow copy
+				shallowBody = {
+					...shallowBody,
 					dietaryPreferences: body.dietaryPreferences
 				};
 			}
 		}
 
-		update();
+		update(); // Called on every form event
 	}
 
+	// Listens for reload/window close and warns user if saving data
 	function beforeUnloadListener(e: BeforeUnloadEvent) {
 		e.preventDefault();
 		return (e.returnValue =
@@ -351,7 +358,7 @@
 			<hr class="my-6 border-t border-light/line-strong" />
 			<h2 class="mb-3 leading-6">Dietary preferences</h2>
 			<div class="grid grid-cols-1 gap-4 370:grid-cols-2">
-				{#each dietaryPreferencesInput as { label, id, value }}
+				{#each DIETARY_PREFERENCE_INPUTS as { label, id, value }}
 					<label
 						for={id}
 						class="nudge-visual-element national-sm light-line relative flex h-10 min-w-[150px] place-items-center gap-2 whitespace-nowrap rounded-full bg-light/background p-3 transition-[outline] duration-500"

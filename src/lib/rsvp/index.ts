@@ -1,5 +1,5 @@
-// * Slightly hacky way to give a focused input border around label
-// * Won't need this when :has is green everywhere
+// Slightly hacky way to give a focused input border around label
+// Won't need this when :has is green everywhere
 export function addFocusBorder(e: Event) {
 	const Input = e.target as HTMLInputElement;
 	Input.parentElement?.classList.add('focus');
@@ -20,6 +20,7 @@ export function nudgeVisualInit() {
 
 	nudgeVisual();
 
+	// Add, then remove focus outline one at a time, every "n" milliseconds
 	function nudgeVisual() {
 		nudgeVisualElements[i].classList.add('focus');
 		nudgeVisualTimeout = setTimeout(() => {
