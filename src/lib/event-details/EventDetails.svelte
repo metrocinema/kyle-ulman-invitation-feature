@@ -1,5 +1,6 @@
 <script lang="ts">
-	import { formatInTimeZone } from 'date-fns-tz';
+	import pkg from 'date-fns-tz';
+	const { formatInTimeZone } = pkg;
 	import SectionHeader from '$lib/section-header/SectionHeader.svelte';
 	import Icon from './Icon.svelte';
 
