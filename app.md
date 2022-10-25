@@ -38,14 +38,14 @@
         - Set cache policy for static assets
         - Largest Contentful Paint within standard
         - Manage Layout shifts
-- Final performance check
+- Final check
+    - Is perfect implementation of designs?
+    - Is markup valid?
+    - Is responsive?
+    - Is fast?
+    - Is accessible?
+    - Is documented?
     - Get page load time
-            - Homepage: 1.77, 1.25
-            - Invitation: 
-                - XQRN7D (yes): 1.86s / 706ms
-                - H9K79U (no): 683ms
-                - CSKUK7 (maybe): 623ms
-                - 4J9TP2 (blank): 
     - Get data load time
     - Get Lighthouse report
 - Write documentation
