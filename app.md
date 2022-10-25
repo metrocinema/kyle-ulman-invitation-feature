@@ -50,8 +50,6 @@
     - Get Lighthouse report
 - Write documentation
 
-metro-cinema-invitation-feature-git-dev-kyleulman.vercel.app/
-
 - Post-production Wishlist
     - Save shadow copy of "yes" response if user clicks "no" or "maybe" then back to "yes"
     - Move form logic to actions
@@ -93,9 +91,10 @@ metro-cinema-invitation-feature-git-dev-kyleulman.vercel.app/
     - Documentation
 
 ## Invitation Codes
+metro-cinema-invitation-feature-git-dev-kyleulman.vercel.app/
 - XQRN7D - Yes
 - H9K79U - No
 - CSKUK7 - Maybe
-- 4J9TP2
+- 4J9TP2 - Blank
 - BQ9FAE
 - T7RSHR
