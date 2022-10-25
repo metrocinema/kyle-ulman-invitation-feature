@@ -40,6 +40,14 @@
         - Manage Layout shifts
 - Final performance check
     - Get page load time
+        - Homepage: 337ms
+        - Invitation: 
+            - Initial load: 
+                - XQRN7D (yes): 837ms
+                - H9K79U (no): 683ms
+                - CSKUK7 (maybe): 623ms
+                - 
+            - Cached loads: 356, 337, 329, 353, 356
     - Get data load time
     - Get Lighthouse report
 - Write documentation

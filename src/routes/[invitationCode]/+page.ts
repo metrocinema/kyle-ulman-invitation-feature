@@ -18,12 +18,12 @@ export const load: PageLoad = async ({ params, fetch, setHeaders }) => {
 		throw error(RES.status, { message: RET.errorMessage });
 	}
 
-	const maxAge = 60 * 60 * 6; // 6 hours
+	// const maxAge = 60 * 60 * 6; // 6 hours
 
-	setHeaders({
-		'cache-control':
-			RES.headers.get('cache-control') || `public, max-age=${maxAge}`
-	});
+	// setHeaders({
+	// 	'cache-control':
+	// 		RES.headers.get('cache-control') || `public, max-age=${maxAge}`
+	// });
 
 	return { ...RET.data, code: CODE };
 };
