@@ -3,6 +3,7 @@
 	import { addFocusBorder, nudgeVisualInit, removeFocusBorder } from './';
 	import Toggle from './Toggle.svelte';
 	import SectionHeader from '$lib/section-header/SectionHeader.svelte';
+	import { browser } from '$app/environment';
 
 	export let hostPreferredName: string,
 		code: string | undefined,
@@ -40,6 +41,21 @@
 		}
 	};
 
+	interface Msg {
+		label: string;
+		msg: string;
+	}
+
+	let msg: Msg | undefined = undefined;
+
+	if (rsvpResponse === 'NO') {
+		msg = MSGS.no;
+	} else if (rsvpResponse === 'MAYBE') {
+		msg = MSGS.maybe;
+	} else if (rsvpResponse === 'YES') {
+		msg = MSGS.yes;
+	}
+
 	// RSVP
 	const YES: string = 'YES';
 	const NO: string = 'NO';
@@ -53,7 +69,7 @@
 	const LOW_CARB: string = 'LOW_CARB';
 
 	// Timeout Durations (seconds)
-	const NUDGE_TIMEOUT_DURATION = 3;
+	const NUDGE_TIMEOUT_DURATION = 10;
 	const PUT_TIMEOUT_DURATION = 1.5;
 
 	interface DietaryPreferencesInput {
@@ -104,12 +120,6 @@
 
 	let shadowBody: Body = body;
 
-	interface Msg {
-		label: string;
-		msg: string;
-	}
-
-	let msg: Msg | string = '';
 	let isPut: boolean = false;
 	let nudgeTimeout: ReturnType<typeof setTimeout> | undefined;
 	let putTimeout: ReturnType<typeof setTimeout>;
@@ -147,6 +157,9 @@
 				nudge.set();
 				return;
 			}
+
+			// ! Use to reset form
+			// body.rsvpResponse = 'UNKNOWN';
 
 			const RES = await fetch(
 				`${import.meta.env.VITE_API_URL}/${code}/rsvp`,
@@ -194,7 +207,7 @@
 			resetPrefs();
 		} else if (body.rsvpResponse === YES) {
 			iconName = 'smile';
-			msg = '';
+			msg = undefined;
 
 			const clickedInput = e.target as HTMLInputElement;
 
@@ -256,6 +269,32 @@
 		}
 
 		update();
+	}
+
+	function beforeUnloadListener(e: BeforeUnloadEvent) {
+		e.preventDefault();
+		return (e.returnValue =
+			'Your response has not been saved yet, are you sure you want to exit?');
+	}
+
+	$: {
+		if (msg?.label && browser) {
+			console.log(msg?.label);
+
+			if (msg?.label === 'saving') {
+				window.addEventListener('beforeunload', beforeUnloadListener, {
+					capture: true
+				});
+			} else {
+				window.removeEventListener(
+					'beforeunload',
+					beforeUnloadListener,
+					{
+						capture: true
+					}
+				);
+			}
+		}
 	}
 </script>
 
@@ -362,7 +401,7 @@
 			</div>
 		{/if}
 	</form>
-	{#if typeof msg === 'object'}
+	{#if msg}
 		<p
 			class="mt-4"
 			class:text-orange-700={msg.label && msg.label === 'nudge'}

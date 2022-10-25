@@ -2,7 +2,26 @@
 
 ## To-do
 - Testing
-    - Check form for edge cases & bugs
+    - Check form for edge cases & bugs (+ indicates an action)
+        - on load, previous response (if there is one) is displayed
+        - +yes
+            - nudge after 10s, don't PUT
+            - +special dietary requests
+                - nudge after 10s, don't PUT
+            - +no restrictions...+low carb
+                - +veggie/vegan toggles
+                - +choices -> +no restricts -> choices 
+                - PUT response, display yes | update msg
+                - +special dietary requests
+                    - PUT response, display update msg
+        - +no
+            - Clear previous body data
+            - PUT response, display no msg
+        - +maybe
+            - Clear previous body data
+            - PUT response, display maybe msg
+        - Edge cases:
+            - If currently saving, warn user if they try to exit/reload
     - Test for accessibility
     - Test for UX
 - Final performance check
@@ -14,6 +33,7 @@
 - Post-production
     - Save shadow copy of "yes" response if user clicks "no" or "maybe" then back to "yes"
     - Move form logic to actions
+    - Include offline functionality/service worker
 
 ## Timeline
 
