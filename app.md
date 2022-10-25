@@ -1,8 +1,6 @@
 # Metro Cinema Invitation
 
 ## To-do
-- Polish
-    - Cache the GET response
 - Testing
     - Check form for edge cases & bugs
     - Test for accessibility
