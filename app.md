@@ -40,17 +40,17 @@
         - Manage Layout shifts
 - Final performance check
     - Get page load time
-        - Homepage: 337ms
-        - Invitation: 
-            - Initial load: 
-                - XQRN7D (yes): 837ms
+            - Homepage: 1.77, 1.25
+            - Invitation: 
+                - XQRN7D (yes): 1.86s / 706ms
                 - H9K79U (no): 683ms
                 - CSKUK7 (maybe): 623ms
-                - 
-            - Cached loads: 356, 337, 329, 353, 356
+                - 4J9TP2 (blank): 
     - Get data load time
     - Get Lighthouse report
 - Write documentation
+
+metro-cinema-invitation-feature-git-dev-kyleulman.vercel.app/
 
 - Post-production
     - Save shadow copy of "yes" response if user clicks "no" or "maybe" then back to "yes"
