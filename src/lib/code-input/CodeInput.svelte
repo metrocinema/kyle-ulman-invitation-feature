@@ -30,11 +30,11 @@
 	/>
 	<code>
 		<a
-			href={`${import.meta.env.VITE_CLIENT_URL}/${code}`}
+			href={`${import.meta.env.VITE_CLIENT_URL}/invitation/${code}`}
 			class="underline"
 			data-sveltekit-prefetch
 		>
-			{import.meta.env.VITE_CLIENT_URL}/{code}
+			{import.meta.env.VITE_CLIENT_URL}/invitation/{code}
 		</a>
 	</code>
 </section>
