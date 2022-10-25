@@ -1,11 +1,12 @@
 <script lang="ts">
-	import pkg from 'date-fns-tz';
-	const { formatInTimeZone } = pkg;
-	import SectionHeader from '$lib/section-header/SectionHeader.svelte';
-	import Icon from './Icon.svelte';
-	import ollie from '$lib/assets/ollie.webp';
 	import calendar from '$lib/assets/calendar.webp';
+	import ollie from '$lib/assets/ollie.webp';
 	import pin from '$lib/assets/pin.webp';
+	import SectionHeader from '$lib/section-header/SectionHeader.svelte';
+	import pkg from 'date-fns-tz';
+	import Icon from './Icon.svelte';
+
+	const { formatInTimeZone } = pkg; // CommonJS
 
 	export let eventTitle: string,
 		hostFirstName: string,
@@ -13,17 +14,17 @@
 		eventDateStart: string,
 		eventDateEnd: string;
 
-	const eventDateStartDate: Date = new Date(eventDateStart);
-	const eventDateEndDate: Date = new Date(eventDateEnd);
+	const EVENT_DATE_START_DATE: Date = new Date(eventDateStart);
+	const EVENT_DATE_END_DATE: Date = new Date(eventDateEnd);
 
-	const start: string = formatInTimeZone(
-		eventDateStartDate,
+	const START: string = formatInTimeZone(
+		EVENT_DATE_START_DATE,
 		'America/Chicago',
 		'eee, LLLL d, h:mmaaa'
 	);
 
 	let end: string = formatInTimeZone(
-		eventDateEndDate,
+		EVENT_DATE_END_DATE,
 		'America/Chicago',
 		'h:mmaaa'
 	);
@@ -32,16 +33,16 @@
 	// TODO: accurately reflect the time difference of the event.
 	// TODO: This is ok for now, since it's just an aesthetic
 	// TODO: change, the correct date/time will always display.
-	if (eventDateStartDate.getDate() < eventDateEndDate.getDate()) {
+	if (EVENT_DATE_START_DATE.getDate() < EVENT_DATE_END_DATE.getDate()) {
 		// If date spans more than one day, display full event end date
 		end = formatInTimeZone(
-			eventDateEndDate,
+			EVENT_DATE_END_DATE,
 			'America/Chicago',
 			'eee, LLLL d, h:mmaaa'
 		);
 	}
 
-	let eventDateFmt = start + ' - ' + end;
+	const EVENT_DATE_FORMATTED = START + ' - ' + end;
 </script>
 
 <section
@@ -62,7 +63,7 @@
 		<Icon src={calendar} alt="Calendar icon." />
 		<div>
 			<p>
-				{eventDateFmt}
+				{EVENT_DATE_FORMATTED}
 			</p>
 		</div>
 	</article>
