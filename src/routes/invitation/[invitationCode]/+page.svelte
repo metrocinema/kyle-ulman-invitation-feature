@@ -1,6 +1,6 @@
 <script lang="ts">
-	import type { PageData } from './$types';
 	import type { InvitationEvent, InvitationResponse } from '$lib/types';
+	import type { PageData } from './$types';
 
 	import Divider from '$lib/divider/Divider.svelte';
 	import EventDetails from '$lib/event-details/EventDetails.svelte';

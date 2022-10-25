@@ -302,8 +302,6 @@
 
 	$: {
 		if (msg?.label && browser) {
-			console.log(msg?.label);
-
 			if (msg?.label === 'saving') {
 				window.addEventListener('beforeunload', beforeUnloadListener, {
 					capture: true
