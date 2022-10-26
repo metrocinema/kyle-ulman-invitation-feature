@@ -1,5 +1,5 @@
 <script type="ts">
-	import background from '$lib/assets/background.webp';
+	import hero from '$lib/assets/hero.webp';
 
 	export let posterUrl: string, showTitle: string;
 
@@ -13,8 +13,8 @@
 </script>
 
 <section class="flex flex-col items-center bg-light/background">
-	<figure class="relative flex max-w-[375px] flex-col items-center">
-		<img src={background} alt="Hero background." width="375" height="765" />
+	<figure class="relative flex flex-col items-center">
+		<img src={hero} alt="Hero background." width="488" class="w-[488px]" />
 		<img
 			src={posterUrl}
 			alt="Film poster."

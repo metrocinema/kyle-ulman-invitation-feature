@@ -2,7 +2,7 @@
 
 ## Project Review Notes
 - Designer - Roger
-- Ask for stuff! - Focus on producing the best result
+- Ask for stuff! - Focus on whatever produces the best result
 - Scale "You're invited" to match container
 - Message text below "yes", "no", "maybe"
 - Focus state on tabbing only - focus outline is confusing when user clicks
