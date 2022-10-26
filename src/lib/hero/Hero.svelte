@@ -23,7 +23,10 @@
 		<div
 			class="national-sm absolute bottom-[63px] grid max-w-[231px] translate-y-[100%] place-items-center text-center tracking-[0.02em] text-dark/text"
 		>
-			<p class="p-1" class:long-title-background={showTitle.length > 120}>
+			<p
+				class="p-1 text-[14px]"
+				class:long-title-background={showTitle.length > 120}
+			>
 				{showTitle}
 			</p>
 		</div>

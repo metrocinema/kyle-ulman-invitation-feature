@@ -9,6 +9,12 @@
 - Space in Tailwind
 - Use SVG for icons
 
+## Suggestions
+- Film title a bit small, may not be readable on lower-resolution screens
+
+## Questions
+
+
 ## To-do
 - Testing
     - Check form for edge cases & bugs (+ indicates an action)
