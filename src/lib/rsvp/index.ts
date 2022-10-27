@@ -2,12 +2,12 @@
 // Won't need this when :has is green everywhere
 export function addFocusBorder(e: Event) {
 	const Input = e.target as HTMLInputElement;
-	Input.parentElement?.classList.add('active');
+	Input.parentElement?.classList.add('focus');
 }
 
 export function removeFocusBorder(e: Event) {
 	const Input = e.target as HTMLInputElement;
-	Input.parentElement?.classList.remove('active');
+	Input.parentElement?.classList.remove('focus');
 }
 
 export function nudgeVisualInit() {
