@@ -5,10 +5,10 @@
 - Ask for stuff! - Focus on whatever produces the best result
 - Scale "You're invited" to match container
 - Message text below "yes", "no", "maybe"
-- Add loading spinners to form inputs
 - Focus state on tabbing only - focus outline is confusing when user clicks
-- Space in Tailwind
+- Vertical space in event details - Space in Tailwind
 - Use SVG for icons
+- Add loading spinners to form inputs
 
 ## Suggestions
 - Film title a bit small, may not be readable on lower-resolution screens

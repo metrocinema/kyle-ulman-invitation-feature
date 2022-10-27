@@ -6,15 +6,27 @@
 		name: string,
 		value: string,
 		group: string | undefined,
-		rsvp: string | undefined;
+		rsvp: string | undefined,
+		savingDark: string,
+		isSaving: boolean;
 </script>
 
 <label
 	for={id}
-	class="national-sm light-line relative grid h-10 grow basis-10 place-content-center rounded-full bg-light/background p-3"
+	class="national-sm light-line relative grid h-10 grow basis-10 cursor-pointer place-content-center rounded-full bg-light/background p-3"
 	class:active={rsvp === value}
 >
-	{label}
+	{#if isSaving}
+		<img
+			src={savingDark}
+			width="12"
+			height="12"
+			alt="Saving icon."
+			class="saving"
+		/>
+	{:else}
+		{label}
+	{/if}
 
 	<input
 		type="radio"

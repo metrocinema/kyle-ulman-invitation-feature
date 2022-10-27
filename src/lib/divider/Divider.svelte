@@ -1,5 +1,5 @@
 <script lang="ts">
-	import divider from '$lib/assets/divider.webp';
+	import divider from '$lib/assets/divider.svg';
 </script>
 
 <div class="grid justify-center bg-light/background-strong">

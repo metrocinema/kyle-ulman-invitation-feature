@@ -47,13 +47,29 @@
 		outline: 1px solid #cfcbcb;
 	}
 
+	.active-check {
+		background: #3f6ac4;
+		outline: 0;
+	}
+
 	.light-primary-line,
-	.active {
+	.active,
+	.focus {
 		outline: 2px solid #3f6ac4;
 	}
 
-	.focus {
+	.dashed {
 		outline: 2px dashed #3f6ac4;
+	}
+
+	.saving {
+		animation: saving infinite linear 5s forwards;
+	}
+
+	@keyframes saving {
+		to {
+			transform: rotate(360deg);
+		}
 	}
 
 	.long-title-background {

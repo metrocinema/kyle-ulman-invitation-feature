@@ -2,11 +2,13 @@
 	import { error } from '@sveltejs/kit';
 	import { browser } from '$app/environment';
 	import Toggle from './Toggle.svelte';
-	import check from '$lib/assets/check.webp';
-	import meh from '$lib/assets/meh.webp';
-	import frown from '$lib/assets/frown.webp';
-	import question from '$lib/assets/question.webp';
-	import smile from '$lib/assets/smile.webp';
+	import check from '$lib/assets/check.svg';
+	import meh from '$lib/assets/meh.svg';
+	import frown from '$lib/assets/frown.svg';
+	import question from '$lib/assets/question.svg';
+	import savingDark from '$lib/assets/saving-dark.svg';
+	import savingLight from '$lib/assets/saving-light.svg';
+	import smile from '$lib/assets/smile.svg';
 	import SectionHeader from '$lib/section-header/SectionHeader.svelte';
 	import { addFocusBorder, nudgeVisualInit, removeFocusBorder } from './';
 
@@ -110,6 +112,7 @@
 
 	// * Init
 	let icon: string = question;
+	let isSaving = false;
 	let msg: Msg | undefined = undefined;
 
 	if (rsvpResponse === 'NO') {
@@ -334,6 +337,8 @@
 				value={YES}
 				bind:group={body.rsvpResponse}
 				rsvp={body.rsvpResponse}
+				{savingDark}
+				isSaving={msg?.label === 'saving' && body.rsvpResponse === YES}
 			/>
 			<Toggle
 				label="No"
@@ -342,6 +347,8 @@
 				value={NO}
 				bind:group={body.rsvpResponse}
 				rsvp={body.rsvpResponse}
+				{savingDark}
+				isSaving={msg?.label === 'saving' && body.rsvpResponse === NO}
 			/>
 			<Toggle
 				label="Maybe"
@@ -350,9 +357,12 @@
 				value={MAYBE}
 				bind:group={body.rsvpResponse}
 				rsvp={body.rsvpResponse}
+				{savingDark}
+				isSaving={msg?.label === 'saving' &&
+					body.rsvpResponse === MAYBE}
 			/>
 		</div>
-		{#if msg}
+		{#if msg && msg.label !== 'saving'}
 			<p
 				class="mt-6 text-center"
 				class:text-orange-700={msg.label && msg.label === 'nudge'}
@@ -365,7 +375,7 @@
 			<hr class="my-6 border-t border-light/line-strong" />
 			<h2 class="mb-3 leading-6">Dietary preferences</h2>
 			<div class="grid grid-cols-1 gap-4 370:grid-cols-2">
-				{#each DIETARY_PREFERENCE_INPUTS as { label, id, value }}
+				{#each DIETARY_PREFERENCE_INPUTS as { label, id, value }, i}
 					<label
 						for={id}
 						class="nudge-visual-element national-sm light-line relative flex h-10 min-w-[150px] place-items-center gap-2 whitespace-nowrap rounded-full bg-light/background p-3 transition-[outline] duration-500"
@@ -373,17 +383,27 @@
 					>
 						<div
 							class="light-line min-h-6 min-w-6 grid h-6 w-6 place-items-center rounded-full"
-							class:bg-active-clr={body.dietaryPreferences.includes(
+							class:active-check={body.dietaryPreferences.includes(
 								value
 							)}
 						>
 							{#if body.dietaryPreferences.includes(value)}
-								<img
-									src={check}
-									alt="Check mark."
-									width="12"
-									height="8"
-								/>
+								{#if msg?.label === 'saving'}
+									<img
+										src={savingLight}
+										alt="Saving icon."
+										width="12"
+										height="12"
+										class="saving"
+									/>
+								{:else}
+									<img
+										src={check}
+										alt="Check mark."
+										width="16"
+										height="12"
+									/>
+								{/if}
 							{/if}
 						</div>
 						{label}
