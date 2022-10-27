@@ -49,29 +49,33 @@
 	class="grid justify-items-center bg-light/background-strong px-6 pt-6 pb-10"
 >
 	<SectionHeader heading="Details" subheading="The Event" />
-	<article class="mt-6 mb-4 flex w-full flex-row items-start gap-[14px]">
-		<Icon src={ollie} alt="Ollie icon." />
-		<div>
-			<p>{eventTitle}</p>
-			<p class="text-light/text-weak">
-				Hosted by {hostFirstName}
-				{hostLastName}
-			</p>
-		</div>
-	</article>
-	<article class="my-4 flex w-full flex-row items-start gap-[14px]">
-		<Icon src={calendar} alt="Calendar icon." />
-		<div>
-			<p>
-				{EVENT_DATE_FORMATTED}
-			</p>
-		</div>
-	</article>
-	<article class="my-4 flex w-full flex-row items-start gap-[14px]">
-		<Icon src={pin} alt="Pin icon." />
-		<div>
-			<p>Metro Cinema Test Suite</p>
-			<p class="text-light/text-weak">3908 Avenue B, Austin, TX 78751</p>
-		</div>
-	</article>
+	<div class="mt-6 space-y-4">
+		<article class="flex w-full flex-row items-start gap-[14px]">
+			<Icon src={ollie} alt="Ollie icon." />
+			<div>
+				<p>{eventTitle}</p>
+				<p class="text-light/text-weak">
+					Hosted by {hostFirstName}
+					{hostLastName}
+				</p>
+			</div>
+		</article>
+		<article class="flex w-full flex-row items-start gap-[14px]">
+			<Icon src={calendar} alt="Calendar icon." />
+			<div>
+				<p>
+					{EVENT_DATE_FORMATTED}
+				</p>
+			</div>
+		</article>
+		<article class="flex w-full flex-row items-start gap-[14px]">
+			<Icon src={pin} alt="Pin icon." />
+			<div>
+				<p>Metro Cinema Test Suite</p>
+				<p class="text-light/text-weak">
+					3908 Avenue B, Austin, TX 78751
+				</p>
+			</div>
+		</article>
+	</div>
 </section>
