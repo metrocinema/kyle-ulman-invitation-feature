@@ -5,30 +5,23 @@
 
 	// prettier-ignore
 	// * Use these to test long titles!
-	// showTitle = `Don't Be A Menace To South Central While Drinking Your Juice In The
-	// 			Hood.`
-	// 			+
-	// 			` A third and fourth line if it's the longest movie title of
-	// 			all time.`;
+	showTitle = `Don't Be A Menace To South Central While Drinking Your Juice In The
+				Hood.`
+	+
+	` A third and fourth line if it's the longest movie title of
+	all time.`;
 </script>
 
-<section class="flex flex-col items-center bg-light/background">
-	<figure class="relative flex flex-col items-center">
-		<img src={hero} alt="Hero background." width="488" class="w-[488px]" />
-		<img
-			src={posterUrl}
-			alt="Film poster."
-			class="absolute bottom-[64px] w-[70%]"
-		/>
-		<div
-			class="national-sm absolute bottom-[63px] grid max-w-[231px] translate-y-[100%] place-items-center text-center tracking-[0.02em] text-dark/text"
+<section class="relative flex flex-col items-center bg-light/background">
+	<img src={hero} alt="Hero background." width="488" class="w-[488px]" />
+	<figure
+		class="absolute bottom-5 flex h-[50%] flex-col items-center justify-evenly gap-1"
+	>
+		<img src={posterUrl} alt="Film poster." class="h-[80%] min-h-0" />
+		<figcaption
+			class="national-sm max-w-[250px] p-1 text-center text-[14px] tracking-[0.02em] text-dark/text"
 		>
-			<p
-				class="p-1 text-[14px]"
-				class:long-title-background={showTitle.length > 120}
-			>
-				{showTitle}
-			</p>
-		</div>
+			{showTitle}
+		</figcaption>
 	</figure>
 </section>
