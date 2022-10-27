@@ -352,6 +352,15 @@
 				rsvp={body.rsvpResponse}
 			/>
 		</div>
+		{#if msg}
+			<p
+				class="mt-6 text-center"
+				class:text-orange-700={msg.label && msg.label === 'nudge'}
+				class:text-green-700={msg.label === 'yes'}
+			>
+				{msg.msg}
+			</p>
+		{/if}
 		{#if body.rsvpResponse === YES}
 			<hr class="my-6 border-t border-light/line-strong" />
 			<h2 class="mb-3 leading-6">Dietary preferences</h2>
@@ -416,13 +425,4 @@
 			</div>
 		{/if}
 	</form>
-	{#if msg}
-		<p
-			class="mt-4"
-			class:text-orange-700={msg.label && msg.label === 'nudge'}
-			class:text-green-700={msg.label === 'yes'}
-		>
-			{msg.msg}
-		</p>
-	{/if}
 </section>
