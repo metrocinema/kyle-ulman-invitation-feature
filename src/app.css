@@ -47,6 +47,11 @@
 		outline: 1px solid #cfcbcb;
 	}
 
+	.active-check {
+		background: #3f6ac4;
+		outline: 0;
+	}
+
 	.light-primary-line,
 	.active {
 		outline: 2px solid #3f6ac4;

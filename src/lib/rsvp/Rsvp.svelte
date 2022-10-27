@@ -373,7 +373,7 @@
 					>
 						<div
 							class="light-line min-h-6 min-w-6 grid h-6 w-6 place-items-center rounded-full"
-							class:bg-active-clr={body.dietaryPreferences.includes(
+							class:active-check={body.dietaryPreferences.includes(
 								value
 							)}
 						>
@@ -381,8 +381,8 @@
 								<img
 									src={check}
 									alt="Check mark."
-									width="12"
-									height="8"
+									width="16"
+									height="12"
 								/>
 							{/if}
 						</div>
