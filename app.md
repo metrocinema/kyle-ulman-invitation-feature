@@ -1,5 +1,6 @@
 # Metro Cinema Invitation
 
+<<<<<<< HEAD
 ## Project Review Notes
 - Designer - Roger
 - Ask for stuff! - Focus on whatever produces the best result
@@ -106,11 +107,15 @@
     - Check load times & other performance metrics
     - Documentation
 
+=======
+>>>>>>> dev
 ## Invitation Codes
+
 metro-cinema-invitation-feature-git-dev-kyleulman.vercel.app/
-- XQRN7D - Yes
-- H9K79U - No
-- CSKUK7 - Maybe
-- 4J9TP2 - Blank
+
+- XQRN7D
+- H9K79U
+- CSKUK7
+- 4J9TP2
 - BQ9FAE
 - T7RSHR
