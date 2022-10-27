@@ -1,7 +1,7 @@
 <script lang="ts">
-	import calendar from '$lib/assets/calendar.webp';
-	import ollie from '$lib/assets/ollie.webp';
-	import pin from '$lib/assets/pin.webp';
+	import calendar from '$lib/assets/calendar.svg';
+	import ollie from '$lib/assets/ollie.svg';
+	import pin from '$lib/assets/pin.svg';
 	import SectionHeader from '$lib/section-header/SectionHeader.svelte';
 	import pkg from 'date-fns-tz';
 	import Icon from './Icon.svelte';

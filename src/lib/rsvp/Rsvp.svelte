@@ -2,11 +2,11 @@
 	import { error } from '@sveltejs/kit';
 	import { browser } from '$app/environment';
 	import Toggle from './Toggle.svelte';
-	import check from '$lib/assets/check.webp';
-	import meh from '$lib/assets/meh.webp';
-	import frown from '$lib/assets/frown.webp';
-	import question from '$lib/assets/question.webp';
-	import smile from '$lib/assets/smile.webp';
+	import check from '$lib/assets/check.svg';
+	import meh from '$lib/assets/meh.svg';
+	import frown from '$lib/assets/frown.svg';
+	import question from '$lib/assets/question.svg';
+	import smile from '$lib/assets/smile.svg';
 	import SectionHeader from '$lib/section-header/SectionHeader.svelte';
 	import { addFocusBorder, nudgeVisualInit, removeFocusBorder } from './';
 
