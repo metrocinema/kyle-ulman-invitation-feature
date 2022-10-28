@@ -49,7 +49,7 @@
 	class="grid justify-items-center bg-light/background-strong px-6 pt-6 pb-10"
 >
 	<SectionHeader heading="Details" subheading="The Event" />
-	<div class="mt-6 space-y-4">
+	<div class="mt-6 w-full space-y-4">
 		<article class="flex w-full flex-row items-start gap-[14px]">
 			<Icon src={ollie} alt="Ollie icon." />
 			<div>
