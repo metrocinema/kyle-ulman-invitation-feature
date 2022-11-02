@@ -5,11 +5,11 @@
 
 	// prettier-ignore
 	// * Use these to test long titles!
-	showTitle = `Don't Be A Menace To South Central While Drinking Your Juice In The
-				Hood.`
-	+
-	` A third and fourth line if it's the longest movie title of
-	all time.`;
+	// showTitle = `Don't Be A Menace To South Central While Drinking Your Juice In The
+	// 			Hood.`
+	// +
+	// ` A third and fourth line if it's the longest movie title of
+	// all time.`;
 </script>
 
 <section class="relative flex flex-col items-center bg-light/background">
