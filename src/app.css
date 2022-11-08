@@ -66,6 +66,17 @@
 		background-color: hsl(220 5% 12% / 0.75);
 	}
 
+	.dont-break-out {
+		/* These are technically the same, but use both */
+		overflow-wrap: break-word;
+		word-wrap: break-word;
+
+		word-break: break-word;
+
+		/* Adds a hyphen where the word breaks, if supported (No Blink) */
+		hyphens: auto;
+	}
+
 	.icon {
 		width: 32px;
 		height: 32px;

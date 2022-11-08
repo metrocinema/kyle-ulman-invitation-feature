@@ -31,7 +31,7 @@
 	<code>
 		<a
 			href={`${import.meta.env.VITE_CLIENT_URL}/invitation/${code}`}
-			class="underline"
+			class="dont-break-out underline"
 			data-sveltekit-prefetch
 		>
 			{import.meta.env.VITE_CLIENT_URL}/invitation/{code}
