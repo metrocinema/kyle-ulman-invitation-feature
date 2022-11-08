@@ -44,7 +44,7 @@
 		},
 		yes: {
 			label: 'yes',
-			msg: `Excellent! Glad you can make it. We've notified ${hostPreferredName} that you are coming, and we'll let the chef know your dietary preferences.`
+			msg: `Excellent! Glad you can make it. We've notified ${hostPreferredName} that you are coming.`
 		},
 		no: {
 			label: 'no',
@@ -56,7 +56,7 @@
 		}
 	};
 
-	const UPDATE_MSG = `We've updated your response.`;
+	const UPDATE_MSG = `Your response has been updated. We'll let the chef know your dietary preferences.`;
 
 	// RSVP Responses
 	const YES: string = 'YES';
@@ -303,7 +303,7 @@
 			/>
 		</div>
 		{#if msg}
-			<div class="mt-6 grid h-28 place-items-center text-center">
+			<div class="mt-6 grid min-h-[48px] place-items-center text-center">
 				{#if msg.label === 'saving'}
 					<img
 						src={savingDark}
