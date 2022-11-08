@@ -303,7 +303,7 @@
 			/>
 		</div>
 		{#if msg}
-			<div class="mt-6 grid place-items-center text-center">
+			<div class="mt-6 grid h-28 place-items-center text-center">
 				{#if msg.label === 'saving'}
 					<img
 						src={savingDark}
