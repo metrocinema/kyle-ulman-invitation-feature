@@ -15,7 +15,7 @@ export const load: PageLoad = async ({ params, fetch }) => {
 	const RET = await RES.json();
 
 	if (RES.status !== 200) {
-		throw error(RES.status, { message: RET.errorMessage });
+		throw error(RES.status, { message: RET.error.errorMessage });
 	}
 
 	return { ...RET.data, code: CODE };

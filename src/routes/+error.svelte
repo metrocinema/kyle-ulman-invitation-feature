@@ -4,6 +4,8 @@
 
 	// svelte-ignore unused-export-let (Including these here disables the browser warning)
 	export let data, form;
+
+	// console.log($page);
 </script>
 
 <CodeInput error={$page.error?.message} />
