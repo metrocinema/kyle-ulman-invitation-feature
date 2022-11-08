@@ -30,11 +30,11 @@
 	/>
 	<code>
 		<a
-			href={`${import.meta.env.VITE_CLIENT_URL}/invitation/${code}`}
+			href={`${import.meta.env.VITE_CLIENT_URL}/invitations/${code}`}
 			class="dont-break-out underline"
 			data-sveltekit-preload-data="hover"
 		>
-			{import.meta.env.VITE_CLIENT_URL}/invitation/{code}
+			{import.meta.env.VITE_CLIENT_URL}/invitations/{code}
 		</a>
 	</code>
 </section>

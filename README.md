@@ -6,7 +6,7 @@ I was tasked to build the UI for an invitation page and implement a form that wo
 
 ## Try it Out
 
-Visit https://metrocinema.vercel.app/invitation/[INVITE_CODE] or go to https://metrocinema.vercel.app, enter the invite code, and click the generated link.
+Visit https://metrocinema.vercel.app/invitations/[INVITE_CODE] or go to https://metrocinema.vercel.app, enter the invite code, and click the generated link.
 
 ## Performance
 
