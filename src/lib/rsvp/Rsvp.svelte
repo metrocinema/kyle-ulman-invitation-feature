@@ -381,7 +381,7 @@
 				/>
 			</div>
 		{/if}
-		{#if isPut === true}
+		{#if isPut === true && body.rsvpResponse === 'YES'}
 			<div class="mt-6 text-center">
 				<i>{UPDATE_MSG}</i>
 			</div>

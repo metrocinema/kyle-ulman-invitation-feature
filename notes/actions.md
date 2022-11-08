@@ -10,3 +10,4 @@
 -   Remove timeouts
 -   Place loading spinner in response message
 -   Reposition messages
+-   Fix "updated" message
