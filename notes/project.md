@@ -5,7 +5,14 @@
 -   Change success text to match others
 -   Set min-height to prevent layout shift with spinner/message
 -   Update message on dietary prefs only
--   Timeout on text box
+    -   Split success message so that dietary prefs part is below special instructions
+    -   Spinner in dietary prefs
+-   Timeout on text box input & dietary prefs
+-   Prevent form submit on focus
+-   Two steps RSVP then dietary prefs
+
+-   Reservation component
+    -   Precursor to invite
 
 ## Invitation Codes
 
