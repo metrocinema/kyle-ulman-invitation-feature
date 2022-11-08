@@ -2,10 +2,6 @@
 
 ## To-do
 
--   Two step RSVP -> Dietary Prefs
--   Tighten up form submits
--   Check form logic, messages
-
 ## 11-08-22
 
 -   Remove nudge
@@ -15,3 +11,5 @@
 -   Fix "updated" message
 -   Update success text to match others
 -   Adjust height to prevent spinner/message layout shift
+-   Two step RSVP -> Dietary Prefs
+-   Tighten up form submits

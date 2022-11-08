@@ -16,8 +16,6 @@
 
 ## Invitation Codes
 
-metro-cinema-invitation-feature-git-dev-kyleulman.vercel.app/
-
 -   J3GZ8E - Elvis
 
 -   XQRN7D
