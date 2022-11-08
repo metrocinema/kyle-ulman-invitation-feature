@@ -2,8 +2,11 @@
 
 ## To-do
 
--   Remove nudge
--   Place loading spinner in response message
--   Remove timeouts
 -   Check form logic, messages
--   Move updated message to its original location
+
+## 11-08-22
+
+-   Remove nudge
+-   Remove timeouts
+-   Place loading spinner in response message
+-   Reposition messages

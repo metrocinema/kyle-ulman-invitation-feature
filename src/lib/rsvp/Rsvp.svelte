@@ -7,10 +7,9 @@
 	import frown from '$lib/assets/frown.svg';
 	import question from '$lib/assets/question.svg';
 	import savingDark from '$lib/assets/saving-dark.svg';
-	import savingLight from '$lib/assets/saving-light.svg';
 	import smile from '$lib/assets/smile.svg';
 	import SectionHeader from '$lib/section-header/SectionHeader.svelte';
-	import { addFocusBorder, nudgeVisualInit, removeFocusBorder } from './';
+	import { addFocusBorder, removeFocusBorder } from './';
 
 	export let hostPreferredName: string,
 		code: string | undefined,
@@ -39,10 +38,6 @@
 	// * Constants
 	// Feedback Messages
 	const MSGS = {
-		nudge: {
-			label: 'nudge',
-			msg: `We need to know your dietary preferences so that we can customize the menu to meet your needs.`
-		},
 		saving: {
 			label: 'saving',
 			msg: `Saving your response...`
@@ -58,12 +53,10 @@
 		maybe: {
 			label: 'maybe',
 			msg: `We've notified ${hostPreferredName}. Please make a decision soon, since we need a final head count as soon as possible.`
-		},
-		update: {
-			label: 'update',
-			msg: `We've updated your response.`
 		}
 	};
+
+	const UPDATE_MSG = `We've updated your response.`;
 
 	// RSVP Responses
 	const YES: string = 'YES';
@@ -106,13 +99,8 @@
 		}
 	];
 
-	// Timeout Durations (seconds)
-	const NUDGE_TIMEOUT_DURATION = 10;
-	const PUT_TIMEOUT_DURATION = 1.5;
-
 	// * Init
 	let icon: string = question;
-	let isSaving = false;
 	let msg: Msg | undefined = undefined;
 
 	if (rsvpResponse === 'NO') {
@@ -133,29 +121,13 @@
 	};
 
 	let shallowBody: Body = body; // Used to save shallow copy of selections
-	let isPut: boolean = false; // Used to determine whether to display success or update message
-	let nudgeTimeout: ReturnType<typeof setTimeout> | undefined = undefined;
-	let putTimeout: ReturnType<typeof setTimeout> | undefined = undefined;
+	let isPut: boolean = false; // When true, display update message
 
 	// * Functions
 	function resetDietaryPreferences() {
 		body.dietaryPreferences = [];
 		body.specialDietaryRequests = '';
 	}
-
-	const nudge = {
-		set: () => {
-			clearTimeout(nudgeTimeout);
-			nudgeTimeout = setTimeout(() => {
-				msg = MSGS.nudge;
-				nudgeVisualInit(); // Highlight inputs animation
-			}, 1000 * (NUDGE_TIMEOUT_DURATION - PUT_TIMEOUT_DURATION));
-		},
-		clear: () => {
-			clearTimeout(nudgeTimeout);
-			nudgeTimeout = undefined;
-		}
-	};
 
 	async function putResponse(body: Body) {
 		const RES = await fetch(
@@ -182,52 +154,31 @@
 	async function update() {
 		msg = MSGS.saving;
 
-		clearTimeout(putTimeout);
-
 		if (body.rsvpResponse === YES) {
-			putTimeout = setTimeout(async () => {
-				// Check that user has selected at least "no restrictions"
-				if (
-					body.rsvpResponse === YES &&
-					body.dietaryPreferences.length < 1
-				) {
-					nudge.set();
-					return;
-				}
+			const isSuccess = await putResponse(body);
+			if (isSuccess === true) {
+				msg = MSGS.yes;
 
-				const isSuccess = await putResponse(body);
-
-				if (isSuccess === true) {
-					if (isPut === false) {
-						msg = MSGS.yes;
-						isPut = true;
-					} else {
-						msg = MSGS.update;
-					}
-				}
-			}, PUT_TIMEOUT_DURATION * 1000);
+				if (isPut === false) isPut = true;
+			}
 		} else if (body.rsvpResponse === NO) {
 			const isSuccess = await putResponse(body);
 			if (isSuccess === true) {
 				msg = MSGS.no;
 			}
-			return;
 		} else if (body.rsvpResponse === MAYBE) {
 			const isSuccess = await putResponse(body);
 			if (isSuccess === true) {
 				msg = MSGS.maybe;
 			}
-			return;
 		}
 	}
 
 	function handleForm(e: Event) {
 		if (body.rsvpResponse === NO) {
-			nudge.clear();
 			icon = frown;
 			resetDietaryPreferences();
 		} else if (body.rsvpResponse === MAYBE) {
-			nudge.clear();
 			icon = meh;
 			resetDietaryPreferences();
 		} else if (body.rsvpResponse === YES) {
@@ -238,8 +189,6 @@
 
 			// No restrictions is clicked
 			if (clickedInput.id === NO_RESTRICTIONS) {
-				nudge.clear();
-
 				// Toggle "no restrictions"/...other selections
 				if (clickedInput.checked === true) {
 					body.dietaryPreferences = [NO_RESTRICTIONS];
@@ -257,8 +206,6 @@
 					'gm'
 				).test(clickedInput.id)
 			) {
-				nudge.clear();
-
 				// Remove "no restrictions" from selection
 				if (body.dietaryPreferences.includes(NO_RESTRICTIONS)) {
 					body.dietaryPreferences = body.dietaryPreferences.filter(
@@ -337,8 +284,6 @@
 				value={YES}
 				bind:group={body.rsvpResponse}
 				rsvp={body.rsvpResponse}
-				{savingDark}
-				isSaving={msg?.label === 'saving' && body.rsvpResponse === YES}
 			/>
 			<Toggle
 				label="No"
@@ -347,8 +292,6 @@
 				value={NO}
 				bind:group={body.rsvpResponse}
 				rsvp={body.rsvpResponse}
-				{savingDark}
-				isSaving={msg?.label === 'saving' && body.rsvpResponse === NO}
 			/>
 			<Toggle
 				label="Maybe"
@@ -357,28 +300,33 @@
 				value={MAYBE}
 				bind:group={body.rsvpResponse}
 				rsvp={body.rsvpResponse}
-				{savingDark}
-				isSaving={msg?.label === 'saving' &&
-					body.rsvpResponse === MAYBE}
 			/>
 		</div>
-		{#if msg && msg.label !== 'saving'}
-			<p
-				class="mt-6 text-center"
-				class:text-orange-700={msg.label && msg.label === 'nudge'}
-				class:text-green-700={msg.label === 'yes'}
-			>
-				{msg.msg}
-			</p>
+		{#if msg}
+			<div class="mt-6 grid place-items-center text-center">
+				{#if msg.label === 'saving'}
+					<img
+						src={savingDark}
+						width="32"
+						height="32"
+						alt="Saving icon."
+						class="h-7 w-7 animate-spin-slow"
+					/>
+				{:else}
+					<p class:text-green-700={msg.label === 'yes'}>
+						{msg.msg}
+					</p>
+				{/if}
+			</div>
 		{/if}
 		{#if body.rsvpResponse === YES}
 			<hr class="my-6 border-t border-light/line-strong" />
 			<h2 class="mb-3 leading-6">Dietary preferences</h2>
 			<div class="grid grid-cols-1 gap-4 370:grid-cols-2">
-				{#each DIETARY_PREFERENCE_INPUTS as { label, id, value }, i}
+				{#each DIETARY_PREFERENCE_INPUTS as { label, id, value }}
 					<label
 						for={id}
-						class="nudge-visual-element national-sm light-line relative flex h-10 min-w-[150px] place-items-center gap-2 whitespace-nowrap rounded-full bg-light/background p-3 transition-[outline] duration-500"
+						class="national-sm light-line relative flex h-10 min-w-[150px] place-items-center gap-2 whitespace-nowrap rounded-full bg-light/background p-3"
 						class:active={body.dietaryPreferences.includes(value)}
 					>
 						<div
@@ -388,26 +336,15 @@
 							)}
 						>
 							{#if body.dietaryPreferences.includes(value)}
-								{#if msg?.label === 'saving'}
-									<img
-										src={savingLight}
-										alt="Saving icon."
-										width="12"
-										height="12"
-										class="saving"
-									/>
-								{:else}
-									<img
-										src={check}
-										alt="Check mark."
-										width="16"
-										height="12"
-									/>
-								{/if}
+								<img
+									src={check}
+									alt="Check mark."
+									width="16"
+									height="12"
+								/>
 							{/if}
 						</div>
 						{label}
-
 						<input
 							type="checkbox"
 							{id}
@@ -425,7 +362,7 @@
 				Allergies and special dietary requests.
 			</h2>
 			<div
-				class="nudge-visual-element light-line flex min-h-[120px] flex-col overflow-hidden rounded-[6px] bg-light/background transition-[outline] duration-300"
+				class="light-line flex min-h-[120px] flex-col overflow-hidden rounded-[6px] bg-light/background"
 			>
 				<label
 					for="specialDietaryRequests"
@@ -442,6 +379,11 @@
 					on:focus={addFocusBorder}
 					on:blur={removeFocusBorder}
 				/>
+			</div>
+		{/if}
+		{#if isPut === true}
+			<div class="mt-6 text-center">
+				<i>{UPDATE_MSG}</i>
 			</div>
 		{/if}
 	</form>

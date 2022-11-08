@@ -9,6 +9,9 @@ module.exports = {
 			serif: ['"Kepler Std"', ...defaultTheme.fontFamily.serif]
 		},
 		extend: {
+			animation: {
+				'spin-slow': 'spin 5s linear infinite'
+			},
 			colors: {
 				'light/background': '#FFFFFF',
 				'dark/text': '#F5F4F3', // light
