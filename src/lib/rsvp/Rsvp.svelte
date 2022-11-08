@@ -313,7 +313,7 @@
 						class="h-7 w-7 animate-spin-slow"
 					/>
 				{:else}
-					<p class:text-green-700={msg.label === 'yes'}>
+					<p>
 						{msg.msg}
 					</p>
 				{/if}
