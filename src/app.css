@@ -40,11 +40,11 @@
 	}
 
 	.light-line {
-		outline: 1px solid #edeae9;
+		border: 1px solid #edeae9;
 	}
 
 	.light-line-strong {
-		outline: 1px solid #cfcbcb;
+		border: 1px solid #cfcbcb;
 	}
 
 	.active-check {
@@ -55,7 +55,7 @@
 	.light-primary-line,
 	.active,
 	.focus {
-		outline: 2px solid #3f6ac4;
+		border: 2px solid #3f6ac4;
 	}
 
 	.dashed {
