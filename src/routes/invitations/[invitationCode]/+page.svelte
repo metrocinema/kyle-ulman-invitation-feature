@@ -33,6 +33,12 @@
 	const { rsvpResponse }: InvitationResponse = data?.invitation;
 </script>
 
+<svelte:head>
+	<meta property="og:title" content={eventTitle} />
+	<meta property="og:type" content="website" />
+	<meta property="og:image" itemprop="image" content={posterUrl} />
+</svelte:head>
+
 <div
 	id="invitation-wrapper"
 	class="bg-white pb-16 text-light/text shadow-lg shadow-black"
