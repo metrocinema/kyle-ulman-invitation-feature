@@ -41,6 +41,11 @@
 </script>
 
 <svelte:head>
+	<meta property="og:image" content={posterUrl} />
+	<meta property="og:image:width" content="726" />
+	<meta property="og:image:height" content="1089" />
+	<meta property="og:url" content={$page.url.toString()} />
+
 	<meta property="og:type" content="website" />
 	{#if $page.url.searchParams.has('update')}
 		<!-- RSVP confirmation -->
@@ -51,7 +56,6 @@
 				eventDateStart
 			)} at Metro Cinema Test Suite"
 		/>
-		<meta property="og:image" itemprop="image" content={posterUrl} />
 		<link itemprop="thumbnailUrl" href={posterUrl} />
 	{:else}
 		<!-- Invitation -->
@@ -60,7 +64,6 @@
 			property="og:description"
 			content="RSVP now for {hostPreferredName}'s private screening of {showTitle} at Metro Cinema Test Suite"
 		/>
-		<meta property="og:image" itemprop="image" content={posterUrl} />
 		<link itemprop="thumbnailUrl" href={posterUrl} />
 	{/if}
 </svelte:head>
