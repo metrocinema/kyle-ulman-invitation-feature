@@ -1,15 +1,14 @@
 <script lang="ts">
-	import { error } from '@sveltejs/kit';
-	import { browser } from '$app/environment';
-	import Toggle from './Toggle.svelte';
 	import check from '$lib/assets/check.svg';
-	import meh from '$lib/assets/meh.svg';
 	import frown from '$lib/assets/frown.svg';
+	import meh from '$lib/assets/meh.svg';
 	import question from '$lib/assets/question.svg';
 	import savingDark from '$lib/assets/saving-dark.svg';
 	import smile from '$lib/assets/smile.svg';
 	import SectionHeader from '$lib/section-header/SectionHeader.svelte';
+	import { error } from '@sveltejs/kit';
 	import { addFocusBorder, removeFocusBorder } from './';
+	import Toggle from './Toggle.svelte';
 
 	export let hostPreferredName: string,
 		code: string | undefined,
@@ -357,7 +356,7 @@
 			</div>
 		</form>
 		<h2 class="mt-4 mb-3 w-full leading-6">
-			Allergies and special dietary requests.
+			Allergies and special dietary requests
 		</h2>
 		<div
 			class="light-line flex min-h-[120px] w-full flex-col overflow-hidden rounded-[6px] bg-light/background"
@@ -366,7 +365,7 @@
 				for="specialDietaryRequests"
 				class="national-sm mx-3 mt-[10px] text-light/primary-text"
 			>
-				Special Dietary Requests
+				Special dietary requests
 			</label>
 			<textarea
 				name="specialDietaryRequests"
