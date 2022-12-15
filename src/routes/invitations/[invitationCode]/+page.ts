@@ -11,6 +11,12 @@ export const load: PageLoad = async ({ params, fetch }) => {
 		});
 	}
 
+	const DATA = await getInvitation(CODE);
+
+	return { ...DATA, code: CODE };
+};
+
+async function getInvitation(CODE: string) {
 	const RES = await fetch(`${import.meta.env.VITE_API_URL}/${CODE}`);
 	const RET = await RES.json();
 
@@ -18,5 +24,5 @@ export const load: PageLoad = async ({ params, fetch }) => {
 		throw error(RES.status, { message: RET.error.errorMessage });
 	}
 
-	return { ...RET.data, code: CODE };
-};
+	return RET.data;
+}

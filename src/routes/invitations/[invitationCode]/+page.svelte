@@ -1,16 +1,16 @@
 <script lang="ts">
-	import type { InvitationEvent, InvitationResponse } from '$lib/types';
-	import type { PageData } from './$types';
 	import { page } from '$app/stores';
-
 	import Divider from '$lib/divider/Divider.svelte';
 	import EventDetails from '$lib/event-details/EventDetails.svelte';
 	import Hero from '$lib/hero/Hero.svelte';
 	import HostMessage from '$lib/host-message/HostMessage.svelte';
 	import Rsvp from '$lib/rsvp/Rsvp.svelte';
 	import SpecialInstructions from '$lib/special-instructions/SpecialInstructions.svelte';
-
+	import type { InvitationEvent, InvitationResponse } from '$lib/types';
 	import { format } from 'date-fns';
+	import { onMount } from 'svelte';
+	import type { PageData } from './$types';
+	import { postView } from './utils';
 
 	export let data: PageData;
 
@@ -38,6 +38,10 @@
 	function toDateTimeString(dateTime: string) {
 		return format(new Date(dateTime), "EEEE, M/d/yyyy 'at' h:mma");
 	}
+
+	onMount(() => {
+		postView(data.code)
+	})
 </script>
 
 <svelte:head>

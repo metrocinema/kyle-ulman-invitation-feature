@@ -9,5 +9,3 @@ I was tasked to build the UI for an invitation page and implement a form that wo
 _These are 'nice to haves' that I would like to implement in the future_
 
 -   Currently, if the user has made selections under "Yes", then selects, "No" or "Maybe", their "Yes" selections are reset. Include logic that allows a shallow copy of the "Yes" selection to be set if the user decides to re-select "Yes".
--   Use SvelteKit's new form actions API to handle the form data in a more progressively-enhanced way.
--   Add a service worker so users can see their invites offline & maybe quicker cached load times.
