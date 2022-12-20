@@ -1,4 +1,4 @@
-<script type="ts">
+<script lang="ts">
 	import hero from '$lib/assets/hero.webp';
 
 	export let posterUrl: string, showTitle: string;
